@@ -1,4 +1,4 @@
-SELECT ?v0 ?v1 ?v3 WHERE {
+CONSTRUCT WHERE {
 	?v0 <http://purl.org/dc/terms/Location> ?v1 .
 	?v0 <http://schema.org/nationality> <http://db.uwaterloo.ca/~galuc/wsdbm/Country15> .
 	?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/gender> ?v3 .

@@ -1,4 +1,4 @@
-SELECT ?v0 WHERE {
+CONSTRUCT WHERE {
 	?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?v1 .
 	?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/friendOf> ?v2 .
 	?v0 <http://purl.org/dc/terms/Location> ?v3 .

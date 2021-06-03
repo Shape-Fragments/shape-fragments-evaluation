@@ -1,4 +1,4 @@
-SELECT ?v0 ?v3 ?v4 ?v8 WHERE {
+CONSTRUCT WHERE {
 	?v0 <http://schema.org/legalName> ?v1 .
 	?v0 <http://purl.org/goodrelations/offers> ?v2 .
 	?v2 <http://schema.org/eligibleRegion> <http://db.uwaterloo.ca/~galuc/wsdbm/Country5> .

@@ -1,4 +1,4 @@
-SELECT ?v0 ?v1 ?v3 ?v4 ?v5 ?v6 ?v7 ?v8 ?v9 WHERE {
+CONSTRUCT WHERE {
 	?v0 <http://purl.org/goodrelations/includes> ?v1 .
 	<http://db.uwaterloo.ca/~galuc/wsdbm/Retailer74> <http://purl.org/goodrelations/offers> ?v0 .
 	?v0 <http://purl.org/goodrelations/price> ?v3 .
