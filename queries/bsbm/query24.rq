@@ -1,4 +1,7 @@
-SELECT ?property ?hasValue ?isValueOf 
+CONSTRUCT {
+  <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromVendor28/Offer52941> ?property ?hasValue .
+  ?isValueOf ?property <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromVendor28/Offer52941>
+}
 WHERE {   
       { <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromVendor28/Offer52941> ?property ?hasValue }
       UNION { ?isValueOf ?property <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromVendor28/Offer52941> }
