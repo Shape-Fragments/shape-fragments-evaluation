@@ -9,6 +9,8 @@
 @prefix mo: <http://purl.org/ontology/mo/> .
 @prefix rev: <http://purl.org/ontology/stuff/rev#> .
 @prefix foaf: <http://xmlns.com/foaf/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix purl: <http://purl.org/dc/terms/> .
 
 :C3shape a sh:NodeShape ;
     sh:targetSubjectsOf wsdbm:likes ;
@@ -17,7 +19,11 @@
         sh:minCount 1 ;
         ] ;
     sh:property [
-        sh:path dc:friendOfLocation ;
+        sh:path wsdbm:friendOf ;
+        sh:minCount 1 ;
+        ] ;
+    sh:property [
+        sh:path purl:Location ;
         sh:minCount 1 ;
         ] ;
     sh:property [
