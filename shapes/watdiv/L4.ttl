@@ -6,7 +6,7 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :L4shape a sh:NodeShape ;
-    sh:targetSubjectsOf wsdbm:caption ;
+    sh:targetSubjectsOf sorg:caption ;
     sh:property [
         sh:path ogp:tag ;
         sh:hasValue wsdbm:Topic93 ;

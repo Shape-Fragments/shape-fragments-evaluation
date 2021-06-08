@@ -25,16 +25,14 @@
         sh:path gr:includes ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedValueShape [
-            sh:and (
-                [
-                    sh:path ogp:title ;
-                    sh:minCount 1 ;
-                    ]
-                [
-                    sh:path rdf:type ;
-                    sh:minCount 1 ;
-                    ]
-                ) ;
+            sh:property [
+                sh:path ogp:title ;
+                sh:minCount 1 ;
+                ];
+            sh:property [
+                sh:path rdf:type ;
+                sh:minCount 1 ;
+                ];
             ] ;
         ] .
         
