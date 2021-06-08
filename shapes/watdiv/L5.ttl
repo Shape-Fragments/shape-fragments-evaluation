@@ -4,6 +4,7 @@
 @prefix gn: <http://www.geonames.org/ontology#> .
 @prefix ogp: <http://ogp.me/ns#> .
 @prefix gr: <http://purl.org/goodrelations/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :L5shape a sh:NodeShape ;
     sh:targetSubjectsOf sorg:jobTitle ;

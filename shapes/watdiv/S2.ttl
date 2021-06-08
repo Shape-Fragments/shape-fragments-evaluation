@@ -6,6 +6,7 @@
 @prefix gr: <http://purl.org/goodrelations/> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :S2shape a sh:NodeShape ;
     sh:targetSubjectsOf dc:Location ;

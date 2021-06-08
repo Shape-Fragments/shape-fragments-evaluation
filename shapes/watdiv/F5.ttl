@@ -9,11 +9,12 @@
 @prefix mo: <http://purl.org/ontology/mo/> .
 @prefix rev: <http://purl.org/ontology/stuff/rev#> .
 @prefix foaf: <http://xmlns.com/foaf/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :F5shape a sh:NodeShape ;
     sh:targetSubjectsOf gr:price ;
     sh:property [
-        sh:path gr:offers ;
+        sh:path [ sh:inversePath gr:offers ] ;
         sh:hasValue wsdbm:Retailer45 ;
         ] ;
     sh:property [
