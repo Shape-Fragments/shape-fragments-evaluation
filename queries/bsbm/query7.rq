@@ -8,7 +8,7 @@ CONSTRUCT {
       ?product bsbm:productFeature <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductFeature536> .
       ?product bsbm:productFeature  ?feature .
       ?product bsbm:productPropertyTextual1 ?propertyTextual .
-      ?product bsbm:productPropertyNumeric2 ?p2 .
+      ?product ?propertyNumericPredicate ?propertyNumeric .
 }
 WHERE {     
 {         
@@ -18,8 +18,9 @@ WHERE {
       BIND(<http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductFeature539> AS ?feature)
       ?product bsbm:productFeature  ?feature .
       ?product bsbm:productPropertyTextual1 ?propertyTextual .
-      ?product bsbm:productPropertyNumeric1 ?p1 .
-      FILTER ( ?p1 > 19 )
+      BIND(bsbm:productPropertyNumeric1 AS ?propertyNumericPredicate)
+      ?product ?propertyNumericPredicate ?propertyNumeric .
+      FILTER ( ?propertyNumeric > 19 )
 } UNION {        
       ?product rdfs:label ?label .
       ?product rdf:type <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType87> .
@@ -27,6 +28,7 @@ WHERE {
       BIND(<http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductFeature555> AS ?feature)
       ?product bsbm:productFeature  ?feature .
       ?product bsbm:productPropertyTextual1 ?propertyTextual .
-      ?product bsbm:productPropertyNumeric2 ?p2 .
-      FILTER ( ?p2 > 130 )      
+      BIND(bsbm:productPropertyNumeric2 AS ?propertyNumericPredicate)
+      ?product ?propertyNumericPredicate ?propertyNumeric .
+      FILTER ( ?propertyNumeric > 130 )      
 }}

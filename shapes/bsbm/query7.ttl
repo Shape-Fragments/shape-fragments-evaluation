@@ -27,7 +27,7 @@
                     sh:hasValue bsbm-inst:ProductFeature539 ;
                     ]
                 [
-                    sh:path bsbm:productPropertyNumeric2 ;
+                    sh:path bsbm:productPropertyNumeric1 ;
                     sh:qualifiedMinCount 1 ;
                     sh:qualifiedValueShape [ sh:minExclusive 19 ; ] ;
                     ]
