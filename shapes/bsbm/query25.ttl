@@ -4,6 +4,7 @@
 @prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
 @prefix dc: <http://purl.org/dc/elements/1.1/>  .
 @prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :Q25shape a sh:NodeShape ;
     sh:targetNode <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromVendor27/Offer49589> ;
@@ -32,7 +33,7 @@
             ] ;
         ] ;
     sh:property [
-        sh:path bsbm:offerWebPage ;
+        sh:path bsbm:offerWebpage ;
         sh:minCount 1 ;
         ] ;
     sh:property [

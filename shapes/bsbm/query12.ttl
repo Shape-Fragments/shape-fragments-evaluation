@@ -6,6 +6,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :Q12shape a sh:NodeShape ;
     sh:targetNode bsbm-inst-dfp11:Product496 ;
@@ -32,7 +33,8 @@ _:opt1 a sh:NodeShape ; #offer
         ] ;
     sh:property [
         sh:path bsbm:vendor ;
-        sh:qualifiedMinCount 1 [
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
             sh:and (
                 [
                     sh:property [
