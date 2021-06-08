@@ -1,5 +1,6 @@
 @prefix : <http://example.org/> .
 @prefix wsdbm: <http://db.uwaterloo.ca/~galuc/wsdbm/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :L1shape a sh:NodeShape ;
     sh:targetSubjectsOf sorg:caption ;

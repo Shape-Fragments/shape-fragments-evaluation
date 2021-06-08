@@ -9,6 +9,7 @@
 @prefix mo: <http://purl.org/ontology/mo/> .
 @prefix rev: <http://purl.org/ontology/stuff/rev#> .
 @prefix foaf: <http://xmlns.com/foaf/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :F4shape a sh:NodeShape ;
     sh:targetSubjectsOf sorg:description ;

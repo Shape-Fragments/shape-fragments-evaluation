@@ -3,6 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 @prefix dc: <http://purl.org/dc/elements/1.1/>  
 @prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 
 :Q2shape a sh:NodeShape ;
     sh:targetNode bsbm-inst-dfp33:Product1514 ;
