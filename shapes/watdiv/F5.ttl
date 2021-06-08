@@ -14,7 +14,7 @@
 :F5shape a sh:NodeShape ;
     sh:targetSubjectsOf gr:price ;
     sh:property [
-        sh:path gr:offers ;
+        sh:path [ sh:inversePath gr:offers ] ;
         sh:hasValue wsdbm:Retailer45 ;
         ] ;
     sh:property [
@@ -25,14 +25,16 @@
         sh:path gr:includes ;
         sh:qualifiedMinCount 1 ;
         sh:qualifiedValueShape [
-            sh:property [
-                sh:path ogp:title ;
-                sh:minCount 1 ;
-                ];
-            sh:property [
-                sh:path rdf:type ;
-                sh:minCount 1 ;
-                ];
+            sh:and (
+                [
+                    sh:path ogp:title ;
+                    sh:minCount 1 ;
+                    ]
+                [
+                    sh:path rdf:type ;
+                    sh:minCount 1 ;
+                    ]
+                ) ;
             ] ;
         ] .
         
