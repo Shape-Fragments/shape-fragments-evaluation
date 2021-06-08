@@ -41,7 +41,7 @@ _:v3 sh:path gr:includes ;
                 ]
             _:v7 # also get v7
             ) ;
-        ]
+        ] ;
     sh:qualifiedMinCount 1 .
     
     
