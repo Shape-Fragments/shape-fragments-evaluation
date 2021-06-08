@@ -16,6 +16,6 @@ for benchmark in "watdiv" "bsbm"; do
     echo "###################"
     echo "Extracting fragments for shape $code"
     # expects pyshacl-views repository in sibling directory to this repository
-    /usr/bin/python3.6 ../pyshacl-views/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$benchmark/$code-shacl.nt -rs=True -s=shapes/watdiv/$code.ttl -df=nt -sf=turtle -eo=/tmp/shape-views-validation/$benchmark/$code.nt
+    /usr/bin/python3.6 ../pyshacl-views/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$benchmark/$code-shacl.nt -rs=True -s=shapes/$benchmark/$code.ttl -df=nt -sf=turtle -eo=/tmp/shape-views-validation/$benchmark/$code.nt
   done
 done
