@@ -13,6 +13,6 @@
 	sh:qualifiedValueShape [
 	    sh:path sorg:caption ;
 	    sh:minCount 1 ;
-	    ]
+	    ] ;
 	sh:qualifiedMinCount 1 ;
 	] .

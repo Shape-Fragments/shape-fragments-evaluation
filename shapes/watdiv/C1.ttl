@@ -40,7 +40,7 @@
                     sh:qualifiedMinCount 1 ;
                     ]
                     
-                )
+                ) ;
             ] ;
         sh:qualifiedMinCount 1 ;
         ] .

@@ -1,4 +1,4 @@
-@prefix bsbm-inst-dfp33: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer33/> .
+@prefix bsbm-inst-dfp40: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer40/> .
 @prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/>  .
@@ -7,8 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix : <http://example.org/> .
 
-:Q11shape a sh:NodeShape ;
-    sh:targetNode bsbm-inst-dfp33:Product1524 ;
+:Q15shape a sh:NodeShape ;
+    sh:targetNode bsbm-inst-dfp33:Product1866 ;
     sh:property [
         sh:path rdfs:label ;
         sh:minCount 1 ;
