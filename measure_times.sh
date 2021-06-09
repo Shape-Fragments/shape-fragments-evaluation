@@ -8,7 +8,13 @@ mkdir $directory/tyrol
 for benchmark in "tyrol"; do
   # download the data file for the benchmark if it does not exist yet
   if [ ! -f $directory/$benchmark.nt ] ; then
-    curl -o $directory/$benchmark.nt "https://cloud.ilabt.imec.be/index.php/s/2HiMDZMQAsAKNgc/download?path=/&files=$benchmark.nt"
+    curl -o $directory/$benchmark.nt "https://cloud.ilabt.imec.be/index.php/s/2HiMDZMQAsAKNgc/download?path=/&files=$benchmark.nq"
+    
+    # remove xsd:string datatypes as rdflib does not handle these correctly
+    sed -i -e 's!\^\^<http://www\.w3\.org/2001/XMLSchema#string>!!g' /tmp/$directory/$benchmark.nt
+
+    # remove graph from quads, making it a correct ntriples file 
+    sed -i -e 's/ <[^ ]*graph[^ ]*> \.$/ ./g' /tmp/$directory/$benchmark.nt
   fi
 
   echo "benchmark;shape;run;validation_time;extraction_time" > results.csv

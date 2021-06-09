@@ -8,6 +8,9 @@ for benchmark in "watdiv" "bsbm"; do
   # download the data file for the benchmark if it does not exist yet
   if [ ! -f $directory/$benchmark.nt ] ; then
     curl -o $directory/$benchmark.nt "https://cloud.ilabt.imec.be/index.php/s/2HiMDZMQAsAKNgc/download?path=/&files=$benchmark.nt"
+
+    # remove xsd:string datatypes as rdflib does not handle these correctly
+    sed -i -e 's!\^\^<http://www\.w3\.org/2001/XMLSchema#string>!!g' /tmp/$directory/$benchmark.nt
   fi
 
   if [ "$benchmark" == "watdiv" ]; then
