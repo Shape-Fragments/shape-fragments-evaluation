@@ -8,8 +8,6 @@ CONSTRUCT {
      ?product bsbm:productFeature <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductFeature870> .
      ?product bsbm:productPropertyNumeric1 ?p1 .
      ?product bsbm:productPropertyNumeric3 ?p3 .
-     ?product bsbm:productFeature <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductFeature59> .
-     ?product rdfs:label ?testVar
 }
 WHERE {     
      ?product rdfs:label ?label .

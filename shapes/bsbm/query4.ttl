@@ -17,22 +17,20 @@
         ] ;
     sh:property [
         sh:path bsbm:productPropertyNumeric1 ;
-        sh:minCount 1 ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [ sh:minExclusive 399 ] ;
         ] ;
     sh:property [
         sh:path bsbm:productPropertyNumeric3 ;
-        sh:minCount 1 ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [ sh:maxExclusive 311 ] ;
         ] ;
     sh:property [
         sh:path bsbm:productFeature ;
-        sh:qualifiedMinCount 0 ;
+        sh:qualifiedMaxCount 0 ;
         sh:qualifiedValueShape [
             sh:hasValue bsbm-inst:ProductFeature59 ;
             ] ;
-        ] ;
-    sh:property [
-        sh:path rdfs:label ;
-        sh:maxCount 0 ; #negation
         ] .
         
         

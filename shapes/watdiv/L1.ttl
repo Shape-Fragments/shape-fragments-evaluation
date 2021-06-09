@@ -4,17 +4,20 @@
 @prefix sorg: <http://schema.org/> .
 
 :L1shape a sh:NodeShape ;
-    sh:targetSubjectsOf sorg:caption ;
+    sh:targetNode wsdbm:Website186 ;
     sh:property [
-	sh:path wsdbm:subscribes ;
-	sh:hasValue wsdbm:Website186;
-	sh:minCount 1 ;
-	] ;
-    sh:property [
-	sh:path wsdbm:likes ;
-	sh:qualifiedValueShape [
-	    sh:path sorg:caption ;
-	    sh:minCount 1 ;
-	    ] ;
+	sh:path [ sh:inversePath wsdbm:subscribes ] ;
 	sh:qualifiedMinCount 1 ;
-	] .
+	sh:qualifiedValueShape [
+            sh:property [
+                sh:path wsdbm:likes ;
+                sh:qualifiedMinCount 1 ;
+	        sh:qualifiedValueShape [
+                    sh:property [
+                        sh:path sorg:caption ;
+                        sh:minCount 1 ;
+                    ] ;
+                ] ;
+            ];
+        ];
+    ] .
