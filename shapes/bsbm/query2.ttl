@@ -1,4 +1,4 @@
-@prefix bsbm-inst-dfp33: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer1415/> .
+@prefix bsbm-inst-dfp33: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer33/> .
 @prefix bsbm: <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
