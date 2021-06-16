@@ -18,9 +18,9 @@ for benchmark in "tyrol"; do
   fi
 
   echo "benchmark;shape;run;validation_time;extraction_time" > results.csv
-
-  for shape in $benchmark/*.ttl; do
-    for run in {1..5}; do
+  
+  for run in {1..15}; do
+    for shape in $benchmark/*.ttl; do
       echo "###################"
       echo "SHAPE / RUN :   $shape / $run"
 
