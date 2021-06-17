@@ -5,16 +5,16 @@ directory=/tmp/shape-views-validation
 mkdir $directory
 mkdir $directory/tyrol
 
-for benchmark in "tyrol"; do
+for benchmark in "tyrol" "tyrol23m" "tyrol30m"; do
   # download the data file for the benchmark if it does not exist yet
   if [ ! -f $directory/$benchmark.nt ] ; then
     curl -o $directory/$benchmark.nt "https://cloud.ilabt.imec.be/index.php/s/2HiMDZMQAsAKNgc/download?path=/&files=$benchmark.nq"
     
     # remove xsd:string datatypes as rdflib does not handle these correctly
-    sed -i -e 's!\^\^<http://www\.w3\.org/2001/XMLSchema#string>!!g' /tmp/$directory/$benchmark.nt
+    sed -i -e 's!\^\^<http://www\.w3\.org/2001/XMLSchema#string>!!g' $directory/$benchmark.nt
 
     # remove graph from quads, making it a correct ntriples file 
-    sed -i -e 's/ <[^ ]*graph[^ ]*> \.$/ ./g' /tmp/$directory/$benchmark.nt
+    sed -i -e 's/ <[^ ]*graph[^ ]*> \.$/ ./g' $directory/$benchmark.nt
   fi
 
   echo "benchmark;shape;run;validation_time;extraction_time" > results.csv
@@ -24,9 +24,9 @@ for benchmark in "tyrol"; do
       echo "###################"
       echo "SHAPE / RUN :   $shape / $run"
 
-      # prioritize pySHACL over any other pyshacl import (e.g. from pip)
-      # expects pySHACL repository in sibling directory to this repository
-      export PYTHONPATH=../pySHACL
+      # prioritize pySHACL-timers over any other pyshacl import (e.g. from pip)
+      # expects pySHACL-timers repository in sibling directory to this repository
+      export PYTHONPATH=../pySHACL-timers
 
       # expects pySHACL repository in sibling directory to this repository
       validation_time=$(/usr/bin/python3.6 ../pySHACL/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$shape -s=$shape -df=nt -sf=turtle | head -n 1)
