@@ -28,8 +28,8 @@ for benchmark in "tyrol" "tyrol23m" "tyrol30m"; do
       # expects pySHACL-timers repository in sibling directory to this repository
       export PYTHONPATH=../pySHACL-timers
 
-      # expects pySHACL repository in sibling directory to this repository
-      validation_time=$(/usr/bin/python3.6 ../pySHACL/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$shape -s=$shape -df=nt -sf=turtle | head -n 1)
+      # expects pySHACL-timers repository in sibling directory to this repository
+      validation_time=$(/usr/bin/python3.6 ../pySHACL-timers/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$shape -s=$shape -df=nt -sf=turtle | head -n 1)
 
       # sleep a bit to let the process close down completely
       sleep 10
