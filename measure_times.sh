@@ -34,12 +34,12 @@ for benchmark in "tyrol" "tyrol23m" "tyrol30m"; do
       # sleep a bit to let the process close down completely
       sleep 10
     
-      # prioritize pyshacl-views over any other pyshacl import (e.g. from pip)
-      # expects pyshacl-views repository in sibling directory to this repository
-      export PYTHONPATH=../pyshacl-views
+      # prioritize pyshacl-fragments over any other pyshacl import (e.g. from pip)
+      # expects pyshacl-fragments repository in sibling directory to this repository
+      export PYTHONPATH=../pyshacl-fragments
 
-      # expects pyshacl-views repository in sibling directory to this repository
-      extraction_time=$(/usr/bin/python3.6 ../pyshacl-views/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$shape -rs=True -s=$shape -df=nt -sf=turtle | head -n 1)
+      # expects pyshacl-fragments repository in sibling directory to this repository
+      extraction_time=$(/usr/bin/python3.6 ../pyshacl-fragments/pyshacl/cli.py /tmp/shape-views-validation/$benchmark.nt -o=/tmp/shape-views-validation/$shape -rs=True -s=$shape -df=nt -sf=turtle | head -n 1)
 
       # sleep a bit to let the process close down completely
       sleep 10

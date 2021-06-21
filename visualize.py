@@ -62,7 +62,7 @@ font = FontProperties(fname='OldStandardTT-Regular.ttf')
 
 # create plot
 fig, ax = plt.subplots()
-fig.set_size_inches(12.2 / 2.54, 8 / 2.54)
+fig.set_size_inches(8 / 2.54, 6 / 2.54)
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['bottom'].set_visible(False)
@@ -74,16 +74,16 @@ ax.yaxis.set_major_formatter(FormatStrFormatter('%.0f'))
 
 rects1 = plt.bar(index, [eval_avarage[shape] * 1000 for shape in increasing_eval_time], bar_width,
                  alpha=opacity,
-                 color='black',
+                 color='#e69900',
                  label='Evaluation')
 
 rects2 = plt.bar(index + bar_width, [extract_avarage[shape] * 1000 for shape in increasing_eval_time], bar_width,
                  alpha=opacity,
-                 color='grey',
+                 color='#56b4e9',
                  label='Extraction')
 
 plt.xlabel('Shapes', fontproperties=font)
-plt.text(0.12, 0.96, "Time (ms)", horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+plt.text(0.15, 0.96, "Time (ms)", horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
          fontproperties=font)
 plt.yscale('log')
 plt.tick_params(
