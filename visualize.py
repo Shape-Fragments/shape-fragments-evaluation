@@ -5,13 +5,12 @@ from matplotlib.font_manager import FontProperties
 import numpy as np
 import statistics
 
-eval_times = {}
-extract_times = {}
+benchmarks = {}
 
 with open('results.csv', 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=';')
 
-    # parse results in csv file and group them per shape
+    # parse results in csv file and group them per size and shape
     firstrow = True
     for row in reader:
         # skip header row (there might be better ways to do this)
@@ -22,105 +21,72 @@ with open('results.csv', 'r') as csvfile:
         shape = row[1]
         # skip empty measurements
         if row[3] is not '' and row[4] is not '':
+            benchmark = row[0]
             eval_time = float(row[3])
             extract_time = float(row[4])
-            if shape not in eval_times:
-                eval_times[shape] = [eval_time]
-                extract_times[shape] = [extract_time]
+            if benchmark not in benchmarks:
+                benchmarks[benchmark] = {'eval_times': {}, 'extract_times': {}, 'eval_average': {},
+                                         'extract_average': {}, 'eval_stdev': {}, 'extract_stdev': {},
+                                         'overhead_average': {}}
+            if shape not in benchmarks[benchmark]['eval_times']:
+                benchmarks[benchmark]['eval_times'][shape] = [eval_time]
+                benchmarks[benchmark]['extract_times'][shape] = [extract_time]
             else:
-                eval_times[shape].append(eval_time)
-                extract_times[shape].append(extract_time)
+                benchmarks[benchmark]['eval_times'][shape].append(eval_time)
+                benchmarks[benchmark]['extract_times'][shape].append(extract_time)
 
 # calculate avarage time between runs per shape for extraction/evaluation and also calculate overhead:
-eval_avarage = {}
-extract_avarage = {}
-eval_stdev = {}
-extract_stdev = {}
-overhead_average = {}
-for shape in eval_times:
-    eval_avarage[shape] = sum(eval_times[shape]) / len(eval_times[shape])
-    eval_stdev[shape] = statistics.stdev(eval_times[shape])
-    extract_stdev[shape] = statistics.stdev(extract_times[shape])
-    extract_avarage[shape] = sum(extract_times[shape]) / len(extract_times[shape])
-    overhead_average[shape] = extract_avarage[shape] / eval_avarage[shape]
-print(f"Average evaluation time is {statistics.mean(eval_avarage.values())}\
- seconds (stdev {statistics.stdev(eval_avarage.values())})")
-print(
-    f"Average extraction time is {statistics.mean(extract_avarage.values())}\
- seconds (stdev {statistics.stdev(extract_avarage.values())})")
-print(eval_stdev)
-print(extract_stdev)
+for benchmark in benchmarks:
+    for shape in benchmarks[benchmark]['eval_times']:
+        benchmarks[benchmark]['eval_average'][shape] = sum(benchmarks[benchmark]['eval_times'][shape]) / len(
+            benchmarks[benchmark]['eval_times'][shape])
+        benchmarks[benchmark]['eval_stdev'][shape] = statistics.stdev(benchmarks[benchmark]['eval_times'][shape])
+        benchmarks[benchmark]['extract_stdev'][shape] = statistics.stdev(benchmarks[benchmark]['extract_times'][shape])
+        benchmarks[benchmark]['extract_average'][shape] = sum(benchmarks[benchmark]['extract_times'][shape]) / len(
+            benchmarks[benchmark]['extract_times'][shape])
+        benchmarks[benchmark]['overhead_average'][shape] = benchmarks[benchmark]['extract_average'][shape] / \
+                                                           benchmarks[benchmark]['eval_average'][shape]
 
-# get order index arrays for evaluation:
-increasing_eval_time = sorted(eval_avarage.keys(), key=eval_avarage.__getitem__)
-increasing_extract_time = sorted(extract_avarage.keys(), key=extract_avarage.__getitem__)
-increasing_overhead = sorted(overhead_average.keys(), key=overhead_average.__getitem__)
-print([eval_avarage[shape] for shape in increasing_eval_time])
+for benchmark in benchmarks:
+    print(benchmark)
+    print(sorted(benchmarks[benchmark]['eval_average'].values()))
+    print(sorted(benchmarks[benchmark]['eval_average'].items()))
+    print(sorted(benchmarks[benchmark]['overhead_average'].values()))
+
+# shapes with large difference between lowest eval time and lowest eval time are interesting for evaluation
+interesting_shapes = []
+for shape in benchmarks['1']['eval_average']:
+    if benchmarks['4']['eval_average'][shape] / benchmarks['1']['eval_average'][shape] > 1.1:
+        interesting_shapes.append(shape)
 
 # latex font
 font = FontProperties(fname='OldStandardTT-Regular.ttf')
 
-# create plot
-fig, ax = plt.subplots()
-fig.set_size_inches(8 / 2.54, 6 / 2.54)
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-ax.spines['bottom'].set_visible(False)
-ax.spines['left'].set_visible(False)
-index = np.arange(len(increasing_eval_time))
-bar_width = 0.35
-opacity = 0.8
-ax.yaxis.set_major_formatter(FormatStrFormatter('%.0f'))
+fig, axes = plt.subplots(4, 2, sharex=True)
+for i in range(8):
+    shape = interesting_shapes[i]
+    sizes = sorted([int(key) for key in benchmarks.keys()])
+    eval_average = [benchmarks[str(size)]['eval_average'][shape] for size in sizes]
+    extract_average = [benchmarks[str(size)]['extract_average'][shape] for size in sizes]
+    print(eval_average)
+    print(extract_average)
+    ax = axes[i // 2][i % 2]
+    ax.plot(sizes, eval_average, linewidth=0.75, color='black')
+    ax.plot(sizes, extract_average, linewidth=0.75, color='black', linestyle='dashed')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
 
-rects1 = plt.bar(index, [eval_avarage[shape] * 1000 for shape in increasing_eval_time], bar_width,
-                 alpha=opacity,
-                 color='#e69900',
-                 label='Evaluation')
+    ax.text(1, 0.2, shape[6:-9], ha='right', va='bottom', transform=ax.transAxes, fontproperties=font)
+    for label in ax.get_yticklabels():
+        label.set_fontproperties(font)
+    for label in ax.get_xticklabels():
+        label.set_fontproperties(font)
 
-rects2 = plt.bar(index + bar_width, [extract_avarage[shape] * 1000 for shape in increasing_eval_time], bar_width,
-                 alpha=opacity,
-                 color='#56b4e9',
-                 label='Extraction')
-
-plt.xlabel('Shapes', fontproperties=font)
-plt.text(0.15, 0.96, "Time (ms)", horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+plt.text(0.025, 0.5, "Execution time (seconds)", ha='center', va='center', transform=fig.transFigure, rotation=90,
          fontproperties=font)
-plt.yscale('log')
-plt.tick_params(
-    axis='x',  # changes apply to the x-axis
-    which='both',  # both major and minor ticks are affected
-    bottom=False,  # ticks along the bottom edge are off
-    top=False,  # ticks along the top edge are off
-    labelbottom=False),  # labels along the bottom edge are offplt.legend()
-plt.tick_params(
-    axis='y',  # changes apply to the x-axis
-    which='minor',  # minor ticks are affected
-    left=False,  # ticks along the left edge are off
-    right=False)  # ticks along the right edge are off
-plt.legend(loc='upper center', frameon=False, prop=font)
-plt.tight_layout()
-for label in ax.get_yticklabels():
-    label.set_fontproperties(font)
-plt.show()
-fig.savefig("times.pdf")
-
-fig, ax = plt.subplots()
-fig.set_size_inches(12.2 / 2.54, 6 / 2.54)
-plt.bar(range(len(increasing_overhead)),
-        [(overhead_average[shape] - 1.0) * 100 for shape in increasing_overhead],
-        color='grey')
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-ax.spines['bottom'].set_visible(False)
-ax.spines['left'].set_visible(False)
-plt.xticks([])
-plt.yticks([-10, 0, 10])
-for label in ax.get_yticklabels():
-    label.set_fontproperties(font)
-plt.text(0.25, 0.975, "Overhead (percentage)", horizontalalignment='center', verticalalignment='center',
-         transform=ax.transAxes, fontproperties=font)
-plt.text(0.5, 0.5, "Shapes", horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+plt.text(0.5, 0.025, "Data graph size (million triples)", ha='center', va='center', transform=fig.transFigure,
          fontproperties=font)
-plt.tight_layout()
 plt.show()
-fig.savefig("overhead.pdf")
+fig.savefig("interesting_times.pdf")
