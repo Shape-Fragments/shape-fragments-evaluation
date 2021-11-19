@@ -17,7 +17,8 @@ if [ ! -f $directory/tyrol30m.nt ] ; then
   sed -i -e 's/ <[^ ]*graph[^ ]*> \.$/ ./g' $directory/tyrol30m.nt
 fi
 
-for size in {1..30}; do
+# size set in env variable
+# for size in {6..30}; do
   benchmark="tyrol$size"
   mkdir $directory/$benchmark
 
@@ -26,7 +27,7 @@ for size in {1..30}; do
     head -n "$size"000000 $directory/tyrol30m.nt > $directory/$benchmark.nt
   fi
   
-  for run in {1..10}; do
+  for run in {1..5}; do
     for shape in tyrol/*.ttl; do
       echo "###################"
       echo "BENCHMARK/SHAPE/RUN -> $benchmark / $shape / $run"
@@ -55,4 +56,4 @@ for size in {1..30}; do
       echo "$size;$shape;$run;$validation_time;$extraction_time" >> $directory/results.csv
     done
   done
-done
+# done

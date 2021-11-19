@@ -20,7 +20,7 @@ with open('results.csv', 'r') as csvfile:
 
         shape = row[1]
         # skip empty measurements
-        if row[3] is not '' and row[4] is not '':
+        if row[3] is not '' and row[4] is not '' and int(row[2]) < 5:
             benchmark = row[0]
             eval_time = float(row[3])
             extract_time = float(row[4])
@@ -62,22 +62,23 @@ for shape in benchmarks['1']['eval_average']:
 # latex font
 font = FontProperties(fname='OldStandardTT-Regular.ttf')
 
-fig, axes = plt.subplots(4, 2, sharex=True)
-for i in range(8):
-    shape = interesting_shapes[i]
+fig, axes = plt.subplots(7, 8, sharex=True, figsize=(30, 30))
+for i in range(54):
+    shape = sorted(benchmarks['1']['eval_average'])[i]
     sizes = sorted([int(key) for key in benchmarks.keys()])
     eval_average = [benchmarks[str(size)]['eval_average'][shape] for size in sizes]
     extract_average = [benchmarks[str(size)]['extract_average'][shape] for size in sizes]
     print(eval_average)
     print(extract_average)
-    ax = axes[i // 2][i % 2]
+    ax = axes[i // 8][i % 8]
     ax.plot(sizes, eval_average, linewidth=0.75, color='black')
     ax.plot(sizes, extract_average, linewidth=0.75, color='black', linestyle='dashed')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
-
+    ymin, ymax = ax.get_ylim()
+    ax.set_ylim((ymin / 1.618, ymax))
     ax.text(1, 0.2, shape[6:-9], ha='right', va='bottom', transform=ax.transAxes, fontproperties=font)
     for label in ax.get_yticklabels():
         label.set_fontproperties(font)
