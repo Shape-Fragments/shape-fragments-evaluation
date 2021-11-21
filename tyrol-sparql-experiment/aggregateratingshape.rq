@@ -1,0 +1,92 @@
+CONSTRUCT { ?s ?p ?o } WHERE { 
+        # new shape as query
+        { 
+        SELECT ?v ?s ?p ?o 
+        WHERE { 
+            { SELECT ?v WHERE { { SELECT ?v WHERE { ?v <http://schema.org/ratingCount> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/ratingCount> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { ?v <http://schema.org/bestRating> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/bestRating> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { ?v <http://schema.org/ratingValue> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/ratingValue> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } . { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) }  } } . 
+            {
+                SELECT ?v ?s ?p ?o 
+                WHERE {
+                    { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/ratingCount> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/ratingCount> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/ratingCount> ?o } } 
+            } } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/ratingCount> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/ratingCount> ?o } } }
+             } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/bestRating> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/bestRating> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/bestRating> ?o } } 
+            } } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/bestRating> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/bestRating> ?o } } }
+             } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/ratingValue> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/ratingValue> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/ratingValue> ?o } } 
+            } } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/ratingValue> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/ratingValue> ?o } } }
+             } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } } } } }  }  
+                }
+            }
+        } } }

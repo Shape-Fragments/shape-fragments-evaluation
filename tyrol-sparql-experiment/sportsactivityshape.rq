@@ -1,0 +1,674 @@
+CONSTRUCT { ?s ?p ?o } WHERE { 
+        # new shape as query
+        { 
+        SELECT ?v ?s ?p ?o 
+        WHERE { 
+            { SELECT ?v WHERE { { SELECT ?v WHERE { ?v <http://schema.org/image> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/description> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/geo> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { ?v <http://schema.org/name> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/name> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/hasMap> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/address> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/address> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/image> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/image> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/faxNumber> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/containsPlace> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { ?v <http://schema.org/url> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/contactPoint> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/telephone> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/amenityFeature> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/email> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/url> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/openingHoursSpecification> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { ?v <http://schema.org/priceRange> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/priceRange> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/aggregateRating> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/aggregateRating> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { ?v <http://schema.org/sameAs> ?o } GROUP BY ?v HAVING (COUNT(?o) > 1 ) } } } . { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/makeOffer> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } . { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } . { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/SportsActivityLocation> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) }  } } . 
+            {
+                SELECT ?v ?s ?p ?o 
+                WHERE {
+                    { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/image> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/image> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/image> ?o } } 
+            } } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/description> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/description> ?o } } }
+             } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/geo> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/geo> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/geo> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/geo> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/geo> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/GeoCoordinates> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/name> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/name> ?o } } 
+            } } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/name> ?o } } }
+             } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/hasMap> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/hasMap> ?o } } }
+             } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/address> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/address> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/address> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/address> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/address> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/PostalAddress> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/image> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/image> ?o } } }
+             } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/faxNumber> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/faxNumber> ?o } } }
+             } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/containsPlace> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/containsPlace> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/containsPlace> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/containsPlace> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/containsPlace> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/Place> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/openingHours> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/openingHours> ?o } } }
+             } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/url> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/url> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/url> ?o } } 
+            } } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/contactPoint> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/contactPoint> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/contactPoint> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/contactPoint> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/contactPoint> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/ContactPoint> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/telephone> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/telephone> ?o } } }
+             } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/amenityFeature> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/amenityFeature> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/amenityFeature> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/amenityFeature> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/amenityFeature> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/LocationFeatureSpecification> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/email> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/email> ?o } } }
+             } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/url> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/url> ?o } } }
+             } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/openingHoursSpecification> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/openingHoursSpecification> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/openingHoursSpecification> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/openingHoursSpecification> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/openingHoursSpecification> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/OpeningHoursSpecification> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE {
+                { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { ?v <http://schema.org/priceRange> ?o } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+                { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/priceRange> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/priceRange> ?o } } 
+            } } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/priceRange> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/priceRange> ?o } } }
+             } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/aggregateRating> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/aggregateRating> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/aggregateRating> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/aggregateRating> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/aggregateRating> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/AggregateRating> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+            SELECT (?t AS ?v) ?s ?p ?o
+            WHERE { { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/sameAs> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/sameAs> ?o } } }
+             } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE {
+        {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/makeOffer> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://schema.org/makeOffer> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://schema.org/makeOffer> ?o } }
+        } UNION {
+          { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+        ?v <http://schema.org/makeOffer> ?o.
+        {
+          SELECT (?v AS ?o)
+          WHERE { SELECT ?v WHERE { { SELECT ?v WHERE { { ?v ?_a ?_b. } UNION { ?_c ?_d ?v } } } MINUS { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } }
+        } } } } } } .
+          ?t <http://schema.org/makeOffer> ?h .
+          {
+            SELECT (?v AS ?h) ?s ?p ?o
+            WHERE { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/Offer> AS ?v ) } } } } } }  }
+        } } }
+         } UNION { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } UNION { 
+        SELECT (?t AS ?v) ?s ?p ?o
+        WHERE { {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/SportsActivityLocation> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        { 
+        # graph_paths POp.PROP
+        SELECT (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+        WHERE { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o } } .
+        { SELECT (?v AS ?h) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/SportsActivityLocation> AS ?v ) } } }
+        } UNION {
+        { SELECT (?v AS ?t) WHERE { SELECT ?v WHERE { 
+    ?v <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?o .
+    { SELECT (?v AS ?o) WHERE { SELECT ?v WHERE { BIND ( <http://schema.org/SportsActivityLocation> AS ?v ) } } }
+     } GROUP BY ?v HAVING (COUNT(?o) >= 1 ) } } .
+        ?t <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?h .
+        { SELECT (?v AS ?h) ?s ?p ?o
+           WHERE { { 
+    SELECT ?v ?s ?p ?o
+    WHERE {}
+     } .  { SELECT ?v WHERE { BIND ( <http://schema.org/SportsActivityLocation> AS ?v ) } } } } } }  }  
+                }
+            }
+        } } }
