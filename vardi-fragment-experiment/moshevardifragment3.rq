@@ -1,0 +1,19 @@
+PREFIX dblp: <https://dblp.org/rdf/schema#>
+PREFIX dblpidv: <https://dblp.org/pid/v/>
+CONSTRUCT { ?ss ?pp ?oo } WHERE { 
+  { SELECT (?o AS ?ss) (dblp:authoredBy AS ?pp) (?s AS ?oo) WHERE {
+    { ?s ^dblp:authoredBy ?o . ?o dblp:authoredBy/^dblp:authoredBy/dblp:authoredBy/^dblp:authoredBy/dblp:authoredBy dblpidv:MosheYVardi }
+    UNION 
+    { ?v ^dblp:authoredBy/dblp:authoredBy ?s . ?s ^dblp:authoredBy ?o . ?o dblp:authoredBy/^dblp:authoredBy/dblp:authoredBy dblpidv:MosheYVardi }
+    UNION
+    { ?v ^dblp:authoredBy/dblp:authoredBy/^dblp:authoredBy/dblp:authoredBy ?s . ?s ^dblp:authoredBy ?o . ?o dblp:authoredBy dblpidv:MosheYVardi }
+  } }
+  UNION
+  { SELECT ?ss (dblp:authoredBy AS ?pp) ?oo WHERE {
+    { ?v ^dblp:authoredBy ?s . ?s dblp:authoredBy ?o . ?o ^dblp:authoredBy/dblp:authoredBy/^dblp:authoredBy/dblp:authoredBy dblpidv:MosheYVardi }
+    UNION
+    { ?v ^dblp:authoredBy/dblp:authoredBy/^dblp:authoredBy ?s . ?s dblp:authoredBy ?o . ?o ^dblp:authoredBy/dblp:authoredBy dblpidv:MosheYVardi }
+    UNION
+    { ?v ^dblp:authoredBy/dblp:authoredBy/^dblp:authoredBy/dblp:authoredBy/^dblp:authoredBy ?s . ?s dblp:authoredBy dblpidv:MosheYVardi }
+  } }
+}
