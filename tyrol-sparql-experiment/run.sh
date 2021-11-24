@@ -10,7 +10,7 @@ do
   echo "######### Size $size"
   for shape in aggregateratingshape geoshapeshape imageobjectshape sportsactivityshape travelactionshape
   do
-    echo "####### Shape $shape"
+    echo "###### Shape $shape"
     echo "### SPARQL"
     # timing
     sparql --time --data tyrol$size.nt --query $CURRENT_DIR/$shape.rq --repeat=2,5 
@@ -18,23 +18,24 @@ do
     # getting fragment
     sparql --data tyrol$size.nt --query $CURRENT_DIR/$shape.rq --results=nt > ${shape}sparqlfragment$size.nt
     
-    totaltime=0.0
+    echo "### pySHACL-fragments"
+    totaltime="0.0"
     for run in {1..5}
     do
-      echo "### pySHACL-fragments"
       # timing
-      time=$(python pySHACL-fragments/pyshacl/cli.py tyrol$size.nt -o /dev/null -rs=True -s=$CURRENT_DIR/$shape.cut.ttl -df=nt -sf=turtle 2> /dev/null | head 1)
+      time=$(python pySHACL-fragments/pyshacl/cli.py tyrol$size.nt -o /dev/null -rs=True -s=$CURRENT_DIR/$shape.cut.ttl -df=nt -sf=turtle 2> /dev/null | head -n 1)
 
       # getting fragment
       python pySHACL-fragments/pyshacl/cli.py tyrol$size.nt -o ${shape}pyshaclfragment$size.nt -rs=True -s=$CURRENT_DIR/$shape.cut.ttl -df=nt -sf=turtle 2> /dev/null > /dev/null
 
-      totaltime=$(echo "$totaltime+$time" | bc)
+      totaltime=$(echo "$totaltime+$time" | bc -l)
       echo "Time: $time sec"
     done
 
-    average= $(echo "$totaltime/$run" | bc)
+    average=$(echo "$totaltime/$run" | bc -l)
     echo "Total time: $totaltime sec for repeat count of $run : average: $average"
+
     echo "Comparing models: "
-    rdfcompare ${shape}sparqlfragment$size.nt o ${shape}pyshaclfragment$size.nt
+    rdfcompare ${shape}sparqlfragment$size.nt ${shape}pyshaclfragment$size.nt
   done
 done

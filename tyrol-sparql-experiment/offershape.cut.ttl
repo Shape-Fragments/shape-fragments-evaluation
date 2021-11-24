@@ -5,14 +5,13 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix : <http://gdb.benchmark.com/>.
 
-:TrueShape a sh:NodeShape .
+:TrueShape a sh:Nodeshape .
 
 #========================================
 #Paths for DatatypeProperties
 #========================================
 :alternateNamePath sh:path schema:alternateName;
-    sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    sh:datatype xsd:string;
     sh:message "Alternate name has wrong type".
 
 :descriptionRequiredPath sh:path schema:description;
@@ -21,7 +20,7 @@
 
 :descriptionPath sh:path schema:description;
     sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    #sh:datatype xsd:string;
     sh:maxCount 1;
     sh:message "Description not set".
 
@@ -30,10 +29,9 @@
     sh:pattern "[0-9.]+ km".
 
 :emailPath sh:path schema:email;
-    sh:node :TrueShape ;
-#  sh:datatype xsd:string;
+  sh:datatype xsd:string;
   sh:maxCount 1;
-#  sh:pattern "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[a-z]{2,4}";
+  sh:pattern "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[a-z]{2,4}";
   sh:message "Email address invalid".
 
 :emailRequiredPath sh:path schema:email;
@@ -46,34 +44,28 @@
     sh:message "End date has invalid form".
 
 :faxNumberPath sh:path schema:faxNumber;
-    sh:node :TrueShape ;
-#  sh:datatype xsd:string;
+  sh:datatype xsd:string;
   sh:maxCount 1;
   sh:or(
-        [
-            sh:node :TrueShape ;
- #       sh:pattern "(0043)[0-9\\ ]*";
+    [
+        sh:pattern "(0043)[0-9\\ ]*";
     ]
-        [
-            sh:node :TrueShape ;
-#        sh:pattern "[+]43[0-9\\ ]*";
+    [
+        sh:pattern "[+]43[0-9\\ ]*";
     ]
-        [
-            sh:node :TrueShape ;
-#        sh:pattern "0043[0-9\\ ]*";
+    [
+        sh:pattern "0043[0-9\\ ]*";
     ]
-        [
-            sh:node :TrueShape ;
-#        sh:maxLength 0;
+    [
+        sh:maxLength 0;
     ]
   );
   sh:message "Fax number is invalid or not from Tirol".
 
 :hasMapPath sh:path schema:hasMap;
-    sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    sh:datatype xsd:string;
     sh:maxCount 1;
- #   sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
+    sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
     sh:message "Map not available".
 
 :hasMenuPath sh:path schema:hasMenu;
@@ -100,28 +92,26 @@
     sh:message "Identifier is not set".
 
 :namePath sh:path schema:name;
-  sh:datatype xsd:string;
+  #sh:datatype xsd:string;
+  sh:node :TrueShape ;
   sh:maxCount 1;
   sh:minCount 1;
   sh:message "Name not set or has wrong type".
 
 :openingHoursPath sh:path schema:openingHours;
-    sh:node :TrueShape .
-#    sh:datatype xsd:string.
+    sh:datatype xsd:string.
 
 :priceRangePath sh:path schema:priceRange;
-    sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    sh:datatype xsd:string;
     sh:minCount 1;
     sh:maxCount 1;
- #   sh:pattern "[$]?[0-9.]+[€]?[ ]?-[ ]?[$]?[0-9.]+[€]?";
+    sh:pattern "[$]?[0-9.]+[€]?[ ]?-[ ]?[$]?[0-9.]+[€]?";
     sh:message "Price range has invalid format or not set".
 
 :sameAsPath sh:path schema:sameAs;
-    sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    sh:datatype xsd:string;
     sh:maxCount 1;
- #   sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
+    sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
     sh:message "sameAs is not set or invalid".
 
 :servesCuisinePath sh:path schema:servesCuisine;
@@ -135,23 +125,19 @@
     sh:message "Start date has invalid form".
 
 :telephonePath sh:path schema:telephone;
-    sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    sh:datatype xsd:string;
     sh:maxCount 1;
     sh:or(
         [
-            sh:node :TrueShape ;
-#        sh:pattern "(0043)[0-9\\ ]*";
-            ]
-        [
-            sh:node :TrueShape ;
-#       sh:pattern "[+]43[0-9\\ ]*";
-            ]
-        [
-            sh:node :TrueShape ;
-#      sh:pattern "0043[0-9\\ ]*";
-            ]
-        );
+        sh:pattern "(0043)[0-9\\ ]*";
+    ]
+    [
+        sh:pattern "[+]43[0-9\\ ]*";
+    ]
+    [
+        sh:pattern "0043[0-9\\ ]*";
+    ]
+    );
     sh:message "Telephone number is not set or not from Tirol".
 
 :telephoneRequiredPath sh:path schema:telephone;
@@ -163,20 +149,22 @@
     sh:message "URL not set".
 
 :urlPath sh:path schema:url;
-    sh:node :TrueShape ;
-#    sh:datatype xsd:string;
+    #sh:datatype xsd:string;
     sh:maxCount 1;
- #   sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
+    sh:node :TrueShape ;
+    #sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
     sh:message "URL not set or invalid".
 
 :validFromPath sh:path schema:validFrom;
-        sh:datatype xsd:string;
-        sh:pattern "(19[7-9][0-9]|20[0-2][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        #sh:pattern "(19[7-9][0-9]|20[0-2][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
         sh:message "Valid from is invalid".
 
 :validThroughPath sh:path schema:validThrough;
-        sh:datatype xsd:string;
-        sh:pattern "(19[7-9][0-9]|2[0-1][0-9][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        #sh:pattern "(19[7-9][0-9]|2[0-1][0-9][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
         sh:message "Valid Through is invalid".
 
     
@@ -186,8 +174,7 @@
 #Paths for ObjectProperties
 #========================================
 :addressPath sh:path schema:address;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:maxCount 1;
     sh:class schema:PostalAddress.
     
@@ -196,8 +183,7 @@
     sh:message "Address is not set".
 
 :aggregateRatigPath sh:path schema:aggregateRating;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:maxCount 1;
     sh:class schema:AggregateRating.
     
@@ -206,18 +192,15 @@
     sh:message "Aggregate rating is not set".
 
 :amenityFeaturePath sh:path schema:amenityFeature;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:class schema:LocationFeatureSpecification.
 
 :containsPlacePath sh:path schema:containsPlace;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:class schema:Place.
 
 :contactPointPath sh:path schema:contactPoint;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:class schema:ContactPoint.
 
 :employeePath sh:path schema:employee;
@@ -230,8 +213,7 @@
 
 
 :geoPath sh:path schema:geo;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:class schema:GeoCoordinates.
 
 :imageRequiredPath sh:path schema:image;
@@ -239,18 +221,15 @@
     sh:message "Image is not set".
 
 :imagePath sh:path schema:image;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNodeOrIRI;
+    sh:nodeKind sh:BlankNodeOrIRI;
     sh:maxCount 1;
     sh:or(
         [
-            sh:node :TrueShape ;
- #           sh:datatype schema:ImageObject;
+            sh:datatype schema:ImageObject;
         ]
         [
-            sh:node :TrueShape ;
-  #          sh:datatype xsd:string;
-   #         sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?+[.(jpg|jpeg|gif|tif|png|bmp)]?";
+            sh:datatype xsd:string;
+            sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?+[.(jpg|jpeg|gif|tif|png|bmp)]?";
         ]   
     ).
 
@@ -259,8 +238,7 @@
     sh:class schema:Place.
 
 :makesOfferPath sh:path schema:makeOffer;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNodeOrIRI;
+    sh:nodeKind sh:BlankNodeOrIRI;
     sh:class schema:Offer.
 
 :offersPath sh:path schema:offers;
@@ -280,8 +258,7 @@
     ).
 
 :openingHoursSpecificationPath sh:path schema:openingHoursSpecification;
-    sh:node :TrueShape ;
-#    sh:nodeKind sh:BlankNode;
+    sh:nodeKind sh:BlankNode;
     sh:class schema:OpeningHoursSpecification.
 
 :openingHoursSpecificationRequiredPath sh:path schema:openingHoursSpecification;
@@ -294,33 +271,65 @@
     sh:class schema:Rating.
 
 
-:SportsActivityLocationShape a sh:NodeShape;
-    sh:targetClass schema:SportsActivityLocation;
-#sh:nodeKind sh:IRI;
-    sh:node :TrueShape ;
-    sh:property :addressPath;
-    sh:property :aggregateRatigPath;
-    sh:property :amenityFeaturePath;
-    sh:property :contactPointPath;
-    sh:property :containsPlacePath;
-    sh:property :descriptionPath;
-    sh:property :emailPath;
-    sh:property :faxNumberPath;
-    sh:property :geoPath;
-    sh:property :hasMapPath;
-    sh:property :imageRequiredPath;
-    sh:property :imagePath;
-    sh:property [
-        sh:path schema:image;
-        sh:maxCount 1;
-        sh:message "Sports activity location is only allowed to have 1 image"
-    ];
+:OfferShape a sh:NodeShape;
+    sh:targetClass schema:Offer;
+    # sh:nodeKind sh:BlankNode;
     sh:property :namePath;
-    sh:property :openingHoursPath;
-    sh:property :openingHoursSpecificationPath;
-    sh:property :priceRangePath;
-    sh:property :sameAsPath;
-    sh:property :telephonePath;
+    sh:property :descriptionPath; #not in sti2 ontology but in data
+    sh:property [ 
+        sh:path schema:availability;
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        sh:minCount 1;
+        sh:maxCount 1;
+        #sh:pattern "(http://schema.org/InStock|http://schema.org/Discontinued|http://schema.org/InStoreOnly|http://schema.org/LimitedAvailability|http://schema.org/OnlineOnly|http://schema.org/OutOfStock|http://schema.org/PreOrder|http://schema.org/PreSale|http://schema.org/SoldOut)";
+        sh:message "Offer availability has invalid value"
+    ];
+    sh:property [
+        sh:path schema:itemOffered;
+        sh:minCount 1;
+        sh:or(
+            [
+                sh:class schema:Service;
+            ]
+            [
+                sh:class schema:Product;
+            ]
+            [
+                sh:class schema:Apartment; #THIS IS NOT IN SCHEMA TOURISM
+            ]
+        );
+        sh:message "Item offered is not set or invalid"
+    ];
+    sh:property [
+        sh:path schema:price;
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:or(
+            [
+                sh:node :TrueShape ;
+                #sh:datatype xsd:integer;
+            ]
+            [
+                sh:node :TrueShape ;
+                #sh:datatype xsd:double;
+            ]
+            [
+                sh:node :TrueShape ;
+                #sh:datatype xsd:string;
+            ]
+        );
+        sh:message "Price not set or invalid datatype"
+    ];
+    sh:property [
+        sh:path schema:priceCurrency;
+        sh:minCount 1;
+        sh:maxCount 1;
+        sh:node :TrueShape ;
+        #sh:pattern "(USD|EUR|GBP|JPY|BTC|CAD|CHF|KRW|HKD|AUD)";
+        #sh:message "Invalid currency"
+    ];
     sh:property :urlRequiredPath;
     sh:property :urlPath;
-    sh:property :makesOfferPath.
+    sh:property :validFromPath;
+    sh:property :validThroughPath.

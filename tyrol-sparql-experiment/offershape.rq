@@ -1,0 +1,808 @@
+SELECT  ?v ?s ?p ?o
+WHERE
+  { { SELECT  ?v ?s ?p ?o
+      WHERE
+        { { SELECT  ?v
+            WHERE
+              { { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/itemOffered>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) >= 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { { SELECT  ?v
+                        WHERE
+                          {   { ?v  ?_a  ?_b }
+                            UNION
+                              { ?_c  ?_d  ?v }
+                          }
+                      }
+                      MINUS
+                        { SELECT  ?v
+                          WHERE
+                            { ?v  <http://schema.org/itemOffered>  ?o
+                              { SELECT  (?v AS ?o)
+                                WHERE
+                                  { SELECT  ?v
+                                    WHERE
+                                      { { SELECT  ?v
+                                          WHERE
+                                            {   { ?v  ?_a  ?_b }
+                                              UNION
+                                                { ?_c  ?_d  ?v }
+                                            }
+                                        }
+                                        MINUS
+                                          { SELECT  ?v
+                                            WHERE
+                                              {   { SELECT  ?v
+                                                    WHERE
+                                                      { ?v  a  ?o
+                                                        { SELECT  (?v AS ?o)
+                                                          WHERE
+                                                            { SELECT  ?v
+                                                              WHERE
+                                                                { BIND(<http://schema.org/Service> AS ?v) }
+                                                            }
+                                                        }
+                                                      }
+                                                    GROUP BY ?v
+                                                    HAVING ( COUNT(?o) >= 1 )
+                                                  }
+                                                UNION
+                                                  { SELECT  ?v
+                                                    WHERE
+                                                      { ?v  a  ?o
+                                                        { SELECT  (?v AS ?o)
+                                                          WHERE
+                                                            { SELECT  ?v
+                                                              WHERE
+                                                                { BIND(<http://schema.org/Product> AS ?v) }
+                                                            }
+                                                        }
+                                                      }
+                                                    GROUP BY ?v
+                                                    HAVING ( COUNT(?o) >= 1 )
+                                                  }
+                                                UNION
+                                                  { SELECT  ?v
+                                                    WHERE
+                                                      { ?v  a  ?o
+                                                        { SELECT  (?v AS ?o)
+                                                          WHERE
+                                                            { SELECT  ?v
+                                                              WHERE
+                                                                { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                            }
+                                                        }
+                                                      }
+                                                    GROUP BY ?v
+                                                    HAVING ( COUNT(?o) >= 1 )
+                                                  }
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                            }
+                        }
+                    }
+                }
+                { SELECT  ?v
+                  WHERE
+                    { { SELECT  ?v
+                        WHERE
+                          {   { ?v  ?_a  ?_b }
+                            UNION
+                              { ?_c  ?_d  ?v }
+                          }
+                      }
+                      MINUS
+                        { SELECT  ?v
+                          WHERE
+                            { ?v  <http://schema.org/description>  ?o }
+                          GROUP BY ?v
+                          HAVING ( COUNT(?o) > 1 )
+                        }
+                    }
+                }
+                { SELECT  ?v
+                  WHERE
+                    {   { ?v  ?_a  ?_b }
+                      UNION
+                        { ?_c  ?_d  ?v }
+                    }
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  a  ?o
+                      { SELECT  (?v AS ?o)
+                        WHERE
+                          { SELECT  ?v
+                            WHERE
+                              { BIND(<http://schema.org/Offer> AS ?v) }
+                          }
+                      }
+                    }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) >= 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/price>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/name>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/url>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/availability>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/priceCurrency>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+              }
+          }
+          { SELECT  ?v ?s ?p ?o
+            WHERE
+              {   { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/itemOffered>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) >= 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/itemOffered> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/itemOffered>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      {   { { SELECT  (?v AS ?t)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { { SELECT  ?v
+                                        WHERE
+                                          {   { ?v  ?_a  ?_b }
+                                            UNION
+                                              { ?_c  ?_d  ?v }
+                                          }
+                                      }
+                                      MINUS
+                                        { SELECT  ?v
+                                          WHERE
+                                            { ?v  <http://schema.org/itemOffered>  ?o
+                                              { SELECT  (?v AS ?o)
+                                                WHERE
+                                                  { SELECT  ?v
+                                                    WHERE
+                                                      { { SELECT  ?v
+                                                          WHERE
+                                                            {   { ?v  ?_a  ?_b }
+                                                              UNION
+                                                                { ?_c  ?_d  ?v }
+                                                            }
+                                                        }
+                                                        MINUS
+                                                          { SELECT  ?v
+                                                            WHERE
+                                                              {   { SELECT  ?v
+                                                                    WHERE
+                                                                      { ?v  a  ?o
+                                                                        { SELECT  (?v AS ?o)
+                                                                          WHERE
+                                                                            { SELECT  ?v
+                                                                              WHERE
+                                                                                { BIND(<http://schema.org/Service> AS ?v) }
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                    GROUP BY ?v
+                                                                    HAVING ( COUNT(?o) >= 1 )
+                                                                  }
+                                                                UNION
+                                                                  { SELECT  ?v
+                                                                    WHERE
+                                                                      { ?v  a  ?o
+                                                                        { SELECT  (?v AS ?o)
+                                                                          WHERE
+                                                                            { SELECT  ?v
+                                                                              WHERE
+                                                                                { BIND(<http://schema.org/Product> AS ?v) }
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                    GROUP BY ?v
+                                                                    HAVING ( COUNT(?o) >= 1 )
+                                                                  }
+                                                                UNION
+                                                                  { SELECT  ?v
+                                                                    WHERE
+                                                                      { ?v  a  ?o
+                                                                        { SELECT  (?v AS ?o)
+                                                                          WHERE
+                                                                            { SELECT  ?v
+                                                                              WHERE
+                                                                                { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                    GROUP BY ?v
+                                                                    HAVING ( COUNT(?o) >= 1 )
+                                                                  }
+                                                              }
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            { SELECT  (?s AS ?t) ?s (<http://schema.org/itemOffered> AS ?p) ?o (?o AS ?h)
+                              WHERE
+                                { ?s  <http://schema.org/itemOffered>  ?o }
+                            }
+                          }
+                        UNION
+                          { { SELECT  (?v AS ?t)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { { SELECT  ?v
+                                        WHERE
+                                          {   { ?v  ?_a  ?_b }
+                                            UNION
+                                              { ?_c  ?_d  ?v }
+                                          }
+                                      }
+                                      MINUS
+                                        { SELECT  ?v
+                                          WHERE
+                                            { ?v  <http://schema.org/itemOffered>  ?o
+                                              { SELECT  (?v AS ?o)
+                                                WHERE
+                                                  { SELECT  ?v
+                                                    WHERE
+                                                      { { SELECT  ?v
+                                                          WHERE
+                                                            {   { ?v  ?_a  ?_b }
+                                                              UNION
+                                                                { ?_c  ?_d  ?v }
+                                                            }
+                                                        }
+                                                        MINUS
+                                                          { SELECT  ?v
+                                                            WHERE
+                                                              {   { SELECT  ?v
+                                                                    WHERE
+                                                                      { ?v  a  ?o
+                                                                        { SELECT  (?v AS ?o)
+                                                                          WHERE
+                                                                            { SELECT  ?v
+                                                                              WHERE
+                                                                                { BIND(<http://schema.org/Service> AS ?v) }
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                    GROUP BY ?v
+                                                                    HAVING ( COUNT(?o) >= 1 )
+                                                                  }
+                                                                UNION
+                                                                  { SELECT  ?v
+                                                                    WHERE
+                                                                      { ?v  a  ?o
+                                                                        { SELECT  (?v AS ?o)
+                                                                          WHERE
+                                                                            { SELECT  ?v
+                                                                              WHERE
+                                                                                { BIND(<http://schema.org/Product> AS ?v) }
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                    GROUP BY ?v
+                                                                    HAVING ( COUNT(?o) >= 1 )
+                                                                  }
+                                                                UNION
+                                                                  { SELECT  ?v
+                                                                    WHERE
+                                                                      { ?v  a  ?o
+                                                                        { SELECT  (?v AS ?o)
+                                                                          WHERE
+                                                                            { SELECT  ?v
+                                                                              WHERE
+                                                                                { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                                            }
+                                                                        }
+                                                                      }
+                                                                    GROUP BY ?v
+                                                                    HAVING ( COUNT(?o) >= 1 )
+                                                                  }
+                                                              }
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ?t  <http://schema.org/itemOffered>  ?h
+                            { SELECT  (?v AS ?h) ?s ?p ?o
+                              WHERE
+                                { SELECT  ?v ?s ?p ?o
+                                  WHERE
+                                    {   { SELECT  (?t AS ?v) ?s ?p ?o
+                                          WHERE
+                                            {   { { SELECT  (?v AS ?t)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { ?v  a  ?o
+                                                            { SELECT  (?v AS ?o)
+                                                              WHERE
+                                                                { SELECT  ?v
+                                                                  WHERE
+                                                                    { BIND(<http://schema.org/Service> AS ?v) }
+                                                                }
+                                                            }
+                                                          }
+                                                        GROUP BY ?v
+                                                        HAVING ( COUNT(?o) >= 1 )
+                                                      }
+                                                  }
+                                                  { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+                                                    WHERE
+                                                      { ?s  a  ?o }
+                                                  }
+                                                  { SELECT  (?v AS ?h)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { BIND(<http://schema.org/Service> AS ?v) }
+                                                      }
+                                                  }
+                                                }
+                                              UNION
+                                                { { SELECT  (?v AS ?t)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { ?v  a  ?o
+                                                            { SELECT  (?v AS ?o)
+                                                              WHERE
+                                                                { SELECT  ?v
+                                                                  WHERE
+                                                                    { BIND(<http://schema.org/Service> AS ?v) }
+                                                                }
+                                                            }
+                                                          }
+                                                        GROUP BY ?v
+                                                        HAVING ( COUNT(?o) >= 1 )
+                                                      }
+                                                  }
+                                                  ?t  a  ?h
+                                                  { SELECT  (?v AS ?h) ?s ?p ?o
+                                                    WHERE
+                                                      { { SELECT  ?v ?s ?p ?o
+                                                          WHERE
+                                                            {  }
+                                                        }
+                                                        { SELECT  ?v
+                                                          WHERE
+                                                            { BIND(<http://schema.org/Service> AS ?v) }
+                                                        }
+                                                      }
+                                                  }
+                                                }
+                                            }
+                                        }
+                                      UNION
+                                        { SELECT  (?t AS ?v) ?s ?p ?o
+                                          WHERE
+                                            {   { { SELECT  (?v AS ?t)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { ?v  a  ?o
+                                                            { SELECT  (?v AS ?o)
+                                                              WHERE
+                                                                { SELECT  ?v
+                                                                  WHERE
+                                                                    { BIND(<http://schema.org/Product> AS ?v) }
+                                                                }
+                                                            }
+                                                          }
+                                                        GROUP BY ?v
+                                                        HAVING ( COUNT(?o) >= 1 )
+                                                      }
+                                                  }
+                                                  { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+                                                    WHERE
+                                                      { ?s  a  ?o }
+                                                  }
+                                                  { SELECT  (?v AS ?h)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { BIND(<http://schema.org/Product> AS ?v) }
+                                                      }
+                                                  }
+                                                }
+                                              UNION
+                                                { { SELECT  (?v AS ?t)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { ?v  a  ?o
+                                                            { SELECT  (?v AS ?o)
+                                                              WHERE
+                                                                { SELECT  ?v
+                                                                  WHERE
+                                                                    { BIND(<http://schema.org/Product> AS ?v) }
+                                                                }
+                                                            }
+                                                          }
+                                                        GROUP BY ?v
+                                                        HAVING ( COUNT(?o) >= 1 )
+                                                      }
+                                                  }
+                                                  ?t  a  ?h
+                                                  { SELECT  (?v AS ?h) ?s ?p ?o
+                                                    WHERE
+                                                      { { SELECT  ?v ?s ?p ?o
+                                                          WHERE
+                                                            {  }
+                                                        }
+                                                        { SELECT  ?v
+                                                          WHERE
+                                                            { BIND(<http://schema.org/Product> AS ?v) }
+                                                        }
+                                                      }
+                                                  }
+                                                }
+                                            }
+                                        }
+                                      UNION
+                                        { SELECT  (?t AS ?v) ?s ?p ?o
+                                          WHERE
+                                            {   { { SELECT  (?v AS ?t)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { ?v  a  ?o
+                                                            { SELECT  (?v AS ?o)
+                                                              WHERE
+                                                                { SELECT  ?v
+                                                                  WHERE
+                                                                    { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                                }
+                                                            }
+                                                          }
+                                                        GROUP BY ?v
+                                                        HAVING ( COUNT(?o) >= 1 )
+                                                      }
+                                                  }
+                                                  { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+                                                    WHERE
+                                                      { ?s  a  ?o }
+                                                  }
+                                                  { SELECT  (?v AS ?h)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                      }
+                                                  }
+                                                }
+                                              UNION
+                                                { { SELECT  (?v AS ?t)
+                                                    WHERE
+                                                      { SELECT  ?v
+                                                        WHERE
+                                                          { ?v  a  ?o
+                                                            { SELECT  (?v AS ?o)
+                                                              WHERE
+                                                                { SELECT  ?v
+                                                                  WHERE
+                                                                    { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                                }
+                                                            }
+                                                          }
+                                                        GROUP BY ?v
+                                                        HAVING ( COUNT(?o) >= 1 )
+                                                      }
+                                                  }
+                                                  ?t  a  ?h
+                                                  { SELECT  (?v AS ?h) ?s ?p ?o
+                                                    WHERE
+                                                      { { SELECT  ?v ?s ?p ?o
+                                                          WHERE
+                                                            {  }
+                                                        }
+                                                        { SELECT  ?v
+                                                          WHERE
+                                                            { BIND(<http://schema.org/Apartment> AS ?v) }
+                                                        }
+                                                      }
+                                                  }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                          }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/price> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/price>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/name>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/url> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/url>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/validFrom> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/validFrom>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/availability> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/availability>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/priceCurrency> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/priceCurrency>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  ?v ?s ?p ?o
+                    WHERE
+                      {  }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/description> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/description>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/validThrough> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/validThrough>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  ?v ?s ?p ?o
+                    WHERE
+                      {  }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      {   { { SELECT  (?v AS ?t)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { ?v  a  ?o
+                                      { SELECT  (?v AS ?o)
+                                        WHERE
+                                          { SELECT  ?v
+                                            WHERE
+                                              { BIND(<http://schema.org/Offer> AS ?v) }
+                                          }
+                                      }
+                                    }
+                                  GROUP BY ?v
+                                  HAVING ( COUNT(?o) >= 1 )
+                                }
+                            }
+                            { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+                              WHERE
+                                { ?s  a  ?o }
+                            }
+                            { SELECT  (?v AS ?h)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { BIND(<http://schema.org/Offer> AS ?v) }
+                                }
+                            }
+                          }
+                        UNION
+                          { { SELECT  (?v AS ?t)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { ?v  a  ?o
+                                      { SELECT  (?v AS ?o)
+                                        WHERE
+                                          { SELECT  ?v
+                                            WHERE
+                                              { BIND(<http://schema.org/Offer> AS ?v) }
+                                          }
+                                      }
+                                    }
+                                  GROUP BY ?v
+                                  HAVING ( COUNT(?o) >= 1 )
+                                }
+                            }
+                            ?t  a  ?h
+                            { SELECT  (?v AS ?h) ?s ?p ?o
+                              WHERE
+                                { { SELECT  ?v ?s ?p ?o
+                                    WHERE
+                                      {  }
+                                  }
+                                  { SELECT  ?v
+                                    WHERE
+                                      { BIND(<http://schema.org/Offer> AS ?v) }
+                                  }
+                                }
+                            }
+                          }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/price>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/price> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/price>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/name>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/name>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/url>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/url> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/url>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/availability>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/availability> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/availability>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/priceCurrency>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/priceCurrency> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/priceCurrency>  ?o }
+                        }
+                      }
+                  }
+              }
+          }
+        }
+    }
+  }

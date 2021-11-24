@@ -5,8 +5,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix : <http://gdb.benchmark.com/>.
 
-:TrueShape a sh:NodeShape .
-
 #========================================
 #Paths for DatatypeProperties
 #========================================
@@ -82,10 +80,9 @@
 
 
 :identifierPath sh:path schema:identifier;
-    sh:node :TrueShape ;
-#sh:datatype xsd:string;
-#sh:pattern "[0-9]+".
-    sh:maxCount 1 .
+    sh:datatype xsd:string;
+    sh:maxCount 1;
+    sh:pattern "[0-9]+".
 
 :identifierRequiredPath sh:path schema:identifier;
     sh:minCount 1;
@@ -148,10 +145,9 @@
     sh:message "URL not set".
 
 :urlPath sh:path schema:url;
-    sh:node :TrueShape ;
-    #sh:datatype xsd:string;
+    sh:datatype xsd:string;
     sh:maxCount 1;
-    #sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
+    sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
     sh:message "URL not set or invalid".
 
 :validFromPath sh:path schema:validFrom;
@@ -267,33 +263,67 @@
     sh:maxCount 1;
     sh:class schema:Rating.
 
-:ImageObjectShape a sh:NodeShape;
-    sh:targetClass schema:ImageObject;
-    sh:property :identifierPath;
-    sh:property :urlRequiredPath;
-    sh:property :urlPath;
+
+:PostalAddressShape a sh:NodeShape;
+    sh:targetClass schema:PostalAddress;
+    sh:node :TrueShape ;
+    #sh:nodeKind sh:BlankNode;
     sh:property [
-        sh:path schema:caption;
+        sh:path schema:addressCountry;
         sh:node :TrueShape ;
         #sh:datatype xsd:string;
+        #sh:maxLength 2;
+        #sh:minLength 2;
+        sh:minCount 1;
         sh:maxCount 1;
-        #sh:pattern "[A-Za-z0-9-_. ]+[.(jpg|jpeg|gif|tif|png|bmp)]?";
-        sh:message "Caption missing or not containing encoding format"
+        sh:message "Country not set or invalid, must be 'AT'"
     ];
-    sh:property [ 
-        sh:path schema:contentUrl;
+    sh:property [
+        sh:path schema:addressCountry;
         sh:node :TrueShape ;
         #sh:datatype xsd:string;
-        sh:maxCount 1;
-        #sh:pattern "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?.(jpg|jpeg|gif|tif|png|bmp|dat)";
-        sh:message "Content URL is invalid"
+        #sh:pattern "AT";
+        sh:message "Country must be 'AT'";
     ];
-    sh:property [ 
-        sh:path schema:uploadDate;
+    sh:property [
+        sh:path schema:addressLocality;
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        sh:minCount 1;
+        sh:maxCount 1;
+        #sh:minLength 1;
+        sh:message "Location not set or invalid"
+    ];
+    sh:property [
+        sh:path schema:addressRegion;
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        #sh:pattern "Tirol";
+        sh:message "Region must be 'Tirol'"
+    ];
+    sh:property [
+        sh:path schema:postalCode;
+        #sh:datatype xsd:string;
+        sh:minCount 1;
+        #sh:minLength 4;
+        #sh:maxLength 4;
+        sh:or(
+            [ 
+                sh:node :TrueShape ;
+                #sh:pattern "^6";
+            ]
+            [ 
+                sh:node :TrueShape ;
+                #sh:pattern "^9";
+            ]
+        );
+        sh:message "Postal Code must be a 4 digit number starting with 6 or 9"
+    ];
+    sh:property [
+        sh:path schema:streetAddress;
         sh:node :TrueShape ;
         #sh:datatype xsd:string;
         sh:maxCount 1;
-        #sh:pattern "(19[7-9][0-9]|20[0-2][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
-        sh:message "Upload date has invalid form"
+        sh:minCount 1;
+        sh:message "Address not set"
     ].
-    

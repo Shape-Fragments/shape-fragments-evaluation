@@ -5,8 +5,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix : <http://gdb.benchmark.com/>.
 
-:TrueShape a sh:NodeShape .
-
 #========================================
 #Paths for DatatypeProperties
 #========================================
@@ -19,7 +17,8 @@
     sh:message "Description not set".
 
 :descriptionPath sh:path schema:description;
-    sh:datatype xsd:string;
+    sh:node :TrueShape ;
+    #sh:datatype xsd:string;
     sh:maxCount 1;
     sh:message "Description not set".
 
@@ -91,11 +90,10 @@
     sh:message "Identifier is not set".
 
 :namePath sh:path schema:name;
-    sh:node :TrueShape ;
-#sh:datatype xsd:string;
-    sh:maxCount 1;
-    sh:minCount 1;
-    sh:message "Name not set or has wrong type".
+  sh:datatype xsd:string;
+  sh:maxCount 1;
+  sh:minCount 1;
+  sh:message "Name not set or has wrong type".
 
 :openingHoursPath sh:path schema:openingHours;
     sh:datatype xsd:string.
@@ -154,13 +152,15 @@
     sh:message "URL not set or invalid".
 
 :validFromPath sh:path schema:validFrom;
-        sh:datatype xsd:string;
-        sh:pattern "(19[7-9][0-9]|20[0-2][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        #sh:pattern "(19[7-9][0-9]|20[0-2][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
         sh:message "Valid from is invalid".
 
 :validThroughPath sh:path schema:validThrough;
-        sh:datatype xsd:string;
-        sh:pattern "(19[7-9][0-9]|2[0-1][0-9][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
+        sh:node :TrueShape ;
+        #sh:datatype xsd:string;
+        #sh:pattern "(19[7-9][0-9]|2[0-1][0-9][0-9])-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])T(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])[.]([0-9][0-9][0-9])Z";
         sh:message "Valid Through is invalid".
 
     
@@ -255,6 +255,7 @@
 
 :openingHoursSpecificationPath sh:path schema:openingHoursSpecification;
     sh:nodeKind sh:BlankNode;
+    sh:node :TrueShape ;
     sh:class schema:OpeningHoursSpecification.
 
 :openingHoursSpecificationRequiredPath sh:path schema:openingHoursSpecification;
@@ -266,50 +267,30 @@
     sh:maxCount 1;
     sh:class schema:Rating.
 
-:GeoShapeShape a sh:NodeShape;
-    sh:targetClass schema:GeoShape;
-    sh:node :TrueShape ;
-    #sh:nodeKind sh:BlankNode;
-    sh:property :namePath;
+
+:OpeningHoursSpecificationShape a sh:NodeShape;
+    sh:targetClass schema:OpeningHoursSpecification;
     sh:property [
-        sh:path schema:box;
         sh:node :TrueShape ;
+        sh:path schema:closes;
         #sh:datatype xsd:string;
-        sh:maxCount 1;
+        #sh:pattern "([0-1][0-9]|2[0-4]):([0-5][0-9])";
+        sh:message "Close time is invalid"
     ];
     sh:property [
-        sh:path schema:circle;
+        sh:path schema:dayOfWeek;
         sh:node :TrueShape ;
         #sh:datatype xsd:string;
-        sh:maxCount 1;
+        #sh:pattern "(http://schema.org/Monday|http://schema.org/Tuesday|http://schema.org/Wednesday|http://schema.org/Thursday|http://schema.org/Friday|http://schema.org/Saturday|http://schema.org/Sunday)";
+        sh:message "Day of week has an invalid value"
     ];
     sh:property [
-        sh:path schema:line;
+        sh:path schema:opens;
         sh:node :TrueShape ;
         #sh:datatype xsd:string;
-        sh:maxCount 1;
+        #sh:pattern "([0-1][0-9]|2[0-4]):([0-5][0-9])";
+        sh:message "Open time is invalid"
     ];
-    sh:property [
-        sh:path schema:polygon;
-        sh:node :TrueShape ;
-        #sh:datatype xsd:string;
-        sh:maxCount 1;
-    ];
-    sh:property [
-        sh:path schema:elevation;
-        sh:maxCount 1;
-        sh:or(
-            [
-                sh:node :TrueShape ;
-                #sh:datatype xsd:integer;
-                #sh:minInclusive 465;
-                #sh:maxInclusive 3798;
-            ]
-            [
-                sh:node :TrueShape ;
-                #sh:datatype xsd:string;
-                #sh:pattern "(4[6-9][0-9]|[5-9][0-9][0-9]|[1-2][0-9][0-9][0-9]|3[0-6][0-9][0-9]|37[0-8][0-9]|379[0-8])";
-            ]
-        );
-        sh:message "Elevation is not in possible margin of Tirol"
-    ].
+    sh:property :validFromPath;
+    sh:property :validThroughPath;
+    sh:property :descriptionPath.
