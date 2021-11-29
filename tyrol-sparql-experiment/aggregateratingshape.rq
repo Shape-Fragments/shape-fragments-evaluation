@@ -6,13 +6,6 @@ WHERE
             WHERE
               { { SELECT  ?v
                   WHERE
-                    {   { ?v  ?_a  ?_b }
-                      UNION
-                        { ?_c  ?_d  ?v }
-                    }
-                }
-                { SELECT  ?v
-                  WHERE
                     { ?v  a  <http://schema.org/AggregateRating> }
                 }
                 { SELECT  ?v
@@ -23,13 +16,13 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/bestRating>  ?o }
+                    { ?v  <http://schema.org/ratingValue>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/ratingValue>  ?o }
+                    { ?v  <http://schema.org/bestRating>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
@@ -48,15 +41,6 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/bestRating> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/bestRating>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
                       { { SELECT  (?s AS ?t) ?s (<http://schema.org/ratingValue> AS ?p) ?o (?o AS ?h)
                           WHERE
                             { ?s  <http://schema.org/ratingValue>  ?o }
@@ -64,9 +48,13 @@ WHERE
                       }
                   }
                 UNION
-                  { SELECT  ?v ?s ?p ?o
+                  { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      {  }
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/bestRating> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/bestRating>  ?o }
+                        }
+                      }
                   }
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
@@ -139,14 +127,14 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/bestRating>  ?o }
+                                { ?v  <http://schema.org/ratingValue>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
                             }
                         }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/bestRating> AS ?p) ?o (?o AS ?h)
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/ratingValue> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/bestRating>  ?o }
+                            { ?s  <http://schema.org/ratingValue>  ?o }
                         }
                       }
                   }
@@ -157,14 +145,14 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/ratingValue>  ?o }
+                                { ?v  <http://schema.org/bestRating>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
                             }
                         }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/ratingValue> AS ?p) ?o (?o AS ?h)
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/bestRating> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/ratingValue>  ?o }
+                            { ?s  <http://schema.org/bestRating>  ?o }
                         }
                       }
                   }

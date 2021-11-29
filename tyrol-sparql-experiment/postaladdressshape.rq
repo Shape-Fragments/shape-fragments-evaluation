@@ -10,24 +10,17 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    {   { ?v  ?_a  ?_b }
-                      UNION
-                        { ?_c  ?_d  ?v }
-                    }
-                }
-                { SELECT  ?v
-                  WHERE
                     { ?v  a  <http://schema.org/PostalAddress> }
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/addressLocality>  ?o }
+                    { ?v  <http://schema.org/addressCountry>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/addressCountry>  ?o }
+                    { ?v  <http://schema.org/addressLocality>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
@@ -43,6 +36,24 @@ WHERE
             WHERE
               {   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/addressCountry> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/addressCountry>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/addressRegion> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/addressRegion>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
                       { { SELECT  (?s AS ?t) ?s (<http://schema.org/addressLocality> AS ?p) ?o (?o AS ?h)
                           WHERE
                             { ?s  <http://schema.org/addressLocality>  ?o }
@@ -52,9 +63,9 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/addressCountry> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/streetAddress> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/addressCountry>  ?o }
+                            { ?s  <http://schema.org/streetAddress>  ?o }
                         }
                       }
                   }
@@ -86,34 +97,11 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/addressRegion> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/addressRegion>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
                       { { SELECT  (?s AS ?t) ?s (<http://schema.org/addressCountry> AS ?p) ?o (?o AS ?h)
                           WHERE
                             { ?s  <http://schema.org/addressCountry>  ?o }
                         }
                       }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/streetAddress> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/streetAddress>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  ?v ?s ?p ?o
-                    WHERE
-                      {  }
                   }
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
@@ -168,14 +156,14 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/addressLocality>  ?o }
+                                { ?v  <http://schema.org/addressCountry>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
                             }
                         }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/addressLocality> AS ?p) ?o (?o AS ?h)
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/addressCountry> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/addressLocality>  ?o }
+                            { ?s  <http://schema.org/addressCountry>  ?o }
                         }
                       }
                   }
@@ -186,14 +174,14 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/addressCountry>  ?o }
+                                { ?v  <http://schema.org/addressLocality>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
                             }
                         }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/addressCountry> AS ?p) ?o (?o AS ?h)
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/addressLocality> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/addressCountry>  ?o }
+                            { ?s  <http://schema.org/addressLocality>  ?o }
                         }
                       }
                   }

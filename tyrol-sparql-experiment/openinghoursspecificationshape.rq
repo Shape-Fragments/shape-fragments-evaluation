@@ -30,25 +30,7 @@ WHERE
           }
           { SELECT  ?v ?s ?p ?o
             WHERE
-              {   { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/closes> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/closes>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/dayOfWeek> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/dayOfWeek>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  ?v ?s ?p ?o
+              {   { SELECT  ?v ?s ?p ?o
                     WHERE
                       {  }
                   }
@@ -73,6 +55,24 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/opens> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/opens>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/closes> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/closes>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
                       { { SELECT  (?s AS ?t) ?s (<http://schema.org/validThrough> AS ?p) ?o (?o AS ?h)
                           WHERE
                             { ?s  <http://schema.org/validThrough>  ?o }
@@ -82,9 +82,9 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/opens> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/dayOfWeek> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/opens>  ?o }
+                            { ?s  <http://schema.org/dayOfWeek>  ?o }
                         }
                       }
                   }

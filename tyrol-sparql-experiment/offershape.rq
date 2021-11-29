@@ -78,30 +78,23 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    {   { ?v  ?_a  ?_b }
-                      UNION
-                        { ?_c  ?_d  ?v }
-                    }
-                }
-                { SELECT  ?v
-                  WHERE
                     { ?v  a  <http://schema.org/Offer> }
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/url>  ?o }
-                  GROUP BY ?v
-                  HAVING ( COUNT(?o) = 1 )
-                }
-                { SELECT  ?v
-                  WHERE
-                    { ?v  <http://schema.org/price>  ?o }
-                  GROUP BY ?v
-                  HAVING ( COUNT(?o) = 1 )
-                }
-                { SELECT  ?v
-                  WHERE
                     { ?v  <http://schema.org/name>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/priceCurrency>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/url>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
@@ -113,7 +106,7 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/priceCurrency>  ?o }
+                    { ?v  <http://schema.org/price>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
@@ -121,7 +114,25 @@ WHERE
           }
           { SELECT  ?v ?s ?p ?o
             WHERE
-              {   { SELECT  ?v ?s ?p ?o
+              {   { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/name>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/validThrough> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/validThrough>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  ?v ?s ?p ?o
                     WHERE
                       {  }
                   }
@@ -416,36 +427,9 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/price> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/validFrom> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/price>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/name>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/availability> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/availability>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/validThrough> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/validThrough>  ?o }
+                            { ?s  <http://schema.org/validFrom>  ?o }
                         }
                       }
                   }
@@ -470,16 +454,20 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/validFrom> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/availability> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/validFrom>  ?o }
+                            { ?s  <http://schema.org/availability>  ?o }
                         }
                       }
                   }
                 UNION
-                  { SELECT  ?v ?s ?p ?o
+                  { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      {  }
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/price> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/price>  ?o }
+                        }
+                      }
                   }
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
@@ -534,42 +522,6 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/url>  ?o }
-                              GROUP BY ?v
-                              HAVING ( COUNT(?o) = 1 )
-                            }
-                        }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/url> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/url>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?v AS ?t)
-                          WHERE
-                            { SELECT  ?v
-                              WHERE
-                                { ?v  <http://schema.org/price>  ?o }
-                              GROUP BY ?v
-                              HAVING ( COUNT(?o) = 1 )
-                            }
-                        }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/price> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/price>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?v AS ?t)
-                          WHERE
-                            { SELECT  ?v
-                              WHERE
                                 { ?v  <http://schema.org/name>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
@@ -578,6 +530,42 @@ WHERE
                         { SELECT  (?s AS ?t) ?s (<http://schema.org/name> AS ?p) ?o (?o AS ?h)
                           WHERE
                             { ?s  <http://schema.org/name>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/priceCurrency>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/priceCurrency> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/priceCurrency>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/url>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/url> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/url>  ?o }
                         }
                       }
                   }
@@ -606,14 +594,14 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/priceCurrency>  ?o }
+                                { ?v  <http://schema.org/price>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
                             }
                         }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/priceCurrency> AS ?p) ?o (?o AS ?h)
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/price> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/priceCurrency>  ?o }
+                            { ?s  <http://schema.org/price>  ?o }
                         }
                       }
                   }
