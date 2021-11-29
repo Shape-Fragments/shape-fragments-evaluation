@@ -1,56 +1,10 @@
-SELECT  ?v ?s ?p ?o
+CONSTRUCT { ?s ?p ?o }
 WHERE
   { { SELECT  ?v ?s ?p ?o
       WHERE
         { { SELECT  ?v
             WHERE
               { { SELECT  ?v
-                  WHERE
-                    { { SELECT  ?v
-                        WHERE
-                          {   { ?v  ?_a  ?_b }
-                            UNION
-                              { ?_c  ?_d  ?v }
-                          }
-                      }
-                      MINUS
-                        { SELECT  ?v
-                          WHERE
-                            { ?v  <http://schema.org/toLocation>  ?o
-                              { SELECT  (?v AS ?o)
-                                WHERE
-                                  { SELECT  ?v
-                                    WHERE
-                                      { { SELECT  ?v
-                                          WHERE
-                                            {   { ?v  ?_a  ?_b }
-                                              UNION
-                                                { ?_c  ?_d  ?v }
-                                            }
-                                        }
-                                        MINUS
-                                          { SELECT  ?v
-                                            WHERE
-                                              { ?v  a  ?o
-                                                { SELECT  (?v AS ?o)
-                                                  WHERE
-                                                    { SELECT  ?v
-                                                      WHERE
-                                                        { BIND(<http://schema.org/Place> AS ?v) }
-                                                    }
-                                                }
-                                              }
-                                            GROUP BY ?v
-                                            HAVING ( COUNT(?o) >= 1 )
-                                          }
-                                      }
-                                  }
-                              }
-                            }
-                        }
-                    }
-                }
-                { SELECT  ?v
                   WHERE
                     { { SELECT  ?v
                         WHERE
@@ -77,17 +31,43 @@ WHERE
                                         MINUS
                                           { SELECT  ?v
                                             WHERE
-                                              { ?v  a  ?o
-                                                { SELECT  (?v AS ?o)
-                                                  WHERE
-                                                    { SELECT  ?v
-                                                      WHERE
-                                                        { BIND(<http://schema.org/Place> AS ?v) }
-                                                    }
-                                                }
-                                              }
-                                            GROUP BY ?v
-                                            HAVING ( COUNT(?o) >= 1 )
+                                              { ?v  a  <http://schema.org/Place> }
+                                          }
+                                      }
+                                  }
+                              }
+                            }
+                        }
+                    }
+                }
+                { SELECT  ?v
+                  WHERE
+                    { { SELECT  ?v
+                        WHERE
+                          {   { ?v  ?_a  ?_b }
+                            UNION
+                              { ?_c  ?_d  ?v }
+                          }
+                      }
+                      MINUS
+                        { SELECT  ?v
+                          WHERE
+                            { ?v  <http://schema.org/toLocation>  ?o
+                              { SELECT  (?v AS ?o)
+                                WHERE
+                                  { SELECT  ?v
+                                    WHERE
+                                      { { SELECT  ?v
+                                          WHERE
+                                            {   { ?v  ?_a  ?_b }
+                                              UNION
+                                                { ?_c  ?_d  ?v }
+                                            }
+                                        }
+                                        MINUS
+                                          { SELECT  ?v
+                                            WHERE
+                                              { ?v  a  <http://schema.org/Place> }
                                           }
                                       }
                                   }
@@ -123,17 +103,25 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  a  ?o
-                      { SELECT  (?v AS ?o)
-                        WHERE
-                          { SELECT  ?v
-                            WHERE
-                              { BIND(<http://schema.org/TravelAction> AS ?v) }
-                          }
-                      }
-                    }
+                    { ?v  a  <http://schema.org/TravelAction> }
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/fromLocation>  ?o }
                   GROUP BY ?v
-                  HAVING ( COUNT(?o) >= 1 )
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/endTime>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
+                }
+                { SELECT  ?v
+                  WHERE
+                    { ?v  <http://schema.org/description>  ?o }
+                  GROUP BY ?v
+                  HAVING ( COUNT(?o) = 1 )
                 }
                 { SELECT  ?v
                   WHERE
@@ -149,25 +137,7 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  <http://schema.org/fromLocation>  ?o }
-                  GROUP BY ?v
-                  HAVING ( COUNT(?o) = 1 )
-                }
-                { SELECT  ?v
-                  WHERE
-                    { ?v  <http://schema.org/description>  ?o }
-                  GROUP BY ?v
-                  HAVING ( COUNT(?o) = 1 )
-                }
-                { SELECT  ?v
-                  WHERE
                     { ?v  <http://schema.org/distance>  ?o }
-                  GROUP BY ?v
-                  HAVING ( COUNT(?o) = 1 )
-                }
-                { SELECT  ?v
-                  WHERE
-                    { ?v  <http://schema.org/endTime>  ?o }
                   GROUP BY ?v
                   HAVING ( COUNT(?o) = 1 )
                 }
@@ -176,194 +146,6 @@ WHERE
           { SELECT  ?v ?s ?p ?o
             WHERE
               {   { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      {   { { SELECT  (?v AS ?t)
-                              WHERE
-                                { SELECT  ?v
-                                  WHERE
-                                    { { SELECT  ?v
-                                        WHERE
-                                          {   { ?v  ?_a  ?_b }
-                                            UNION
-                                              { ?_c  ?_d  ?v }
-                                          }
-                                      }
-                                      MINUS
-                                        { SELECT  ?v
-                                          WHERE
-                                            { ?v  <http://schema.org/toLocation>  ?o
-                                              { SELECT  (?v AS ?o)
-                                                WHERE
-                                                  { SELECT  ?v
-                                                    WHERE
-                                                      { { SELECT  ?v
-                                                          WHERE
-                                                            {   { ?v  ?_a  ?_b }
-                                                              UNION
-                                                                { ?_c  ?_d  ?v }
-                                                            }
-                                                        }
-                                                        MINUS
-                                                          { SELECT  ?v
-                                                            WHERE
-                                                              { ?v  a  ?o
-                                                                { SELECT  (?v AS ?o)
-                                                                  WHERE
-                                                                    { SELECT  ?v
-                                                                      WHERE
-                                                                        { BIND(<http://schema.org/Place> AS ?v) }
-                                                                    }
-                                                                }
-                                                              }
-                                                            GROUP BY ?v
-                                                            HAVING ( COUNT(?o) >= 1 )
-                                                          }
-                                                      }
-                                                  }
-                                              }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            { SELECT  (?s AS ?t) ?s (<http://schema.org/toLocation> AS ?p) ?o (?o AS ?h)
-                              WHERE
-                                { ?s  <http://schema.org/toLocation>  ?o }
-                            }
-                          }
-                        UNION
-                          { { SELECT  (?v AS ?t)
-                              WHERE
-                                { SELECT  ?v
-                                  WHERE
-                                    { { SELECT  ?v
-                                        WHERE
-                                          {   { ?v  ?_a  ?_b }
-                                            UNION
-                                              { ?_c  ?_d  ?v }
-                                          }
-                                      }
-                                      MINUS
-                                        { SELECT  ?v
-                                          WHERE
-                                            { ?v  <http://schema.org/toLocation>  ?o
-                                              { SELECT  (?v AS ?o)
-                                                WHERE
-                                                  { SELECT  ?v
-                                                    WHERE
-                                                      { { SELECT  ?v
-                                                          WHERE
-                                                            {   { ?v  ?_a  ?_b }
-                                                              UNION
-                                                                { ?_c  ?_d  ?v }
-                                                            }
-                                                        }
-                                                        MINUS
-                                                          { SELECT  ?v
-                                                            WHERE
-                                                              { ?v  a  ?o
-                                                                { SELECT  (?v AS ?o)
-                                                                  WHERE
-                                                                    { SELECT  ?v
-                                                                      WHERE
-                                                                        { BIND(<http://schema.org/Place> AS ?v) }
-                                                                    }
-                                                                }
-                                                              }
-                                                            GROUP BY ?v
-                                                            HAVING ( COUNT(?o) >= 1 )
-                                                          }
-                                                      }
-                                                  }
-                                              }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            ?t  <http://schema.org/toLocation>  ?h
-                            { SELECT  (?v AS ?h) ?s ?p ?o
-                              WHERE
-                                { SELECT  (?t AS ?v) ?s ?p ?o
-                                  WHERE
-                                    {   { { SELECT  (?v AS ?t)
-                                            WHERE
-                                              { SELECT  ?v
-                                                WHERE
-                                                  { ?v  a  ?o
-                                                    { SELECT  (?v AS ?o)
-                                                      WHERE
-                                                        { SELECT  ?v
-                                                          WHERE
-                                                            { BIND(<http://schema.org/Place> AS ?v) }
-                                                        }
-                                                    }
-                                                  }
-                                                GROUP BY ?v
-                                                HAVING ( COUNT(?o) >= 1 )
-                                              }
-                                          }
-                                          { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
-                                            WHERE
-                                              { ?s  a  ?o }
-                                          }
-                                          { SELECT  (?v AS ?h)
-                                            WHERE
-                                              { SELECT  ?v
-                                                WHERE
-                                                  { BIND(<http://schema.org/Place> AS ?v) }
-                                              }
-                                          }
-                                        }
-                                      UNION
-                                        { { SELECT  (?v AS ?t)
-                                            WHERE
-                                              { SELECT  ?v
-                                                WHERE
-                                                  { ?v  a  ?o
-                                                    { SELECT  (?v AS ?o)
-                                                      WHERE
-                                                        { SELECT  ?v
-                                                          WHERE
-                                                            { BIND(<http://schema.org/Place> AS ?v) }
-                                                        }
-                                                    }
-                                                  }
-                                                GROUP BY ?v
-                                                HAVING ( COUNT(?o) >= 1 )
-                                              }
-                                          }
-                                          ?t  a  ?h
-                                          { SELECT  (?v AS ?h) ?s ?p ?o
-                                            WHERE
-                                              { { SELECT  ?v ?s ?p ?o
-                                                  WHERE
-                                                    {  }
-                                                }
-                                                { SELECT  ?v
-                                                  WHERE
-                                                    { BIND(<http://schema.org/Place> AS ?v) }
-                                                }
-                                              }
-                                          }
-                                        }
-                                    }
-                                }
-                            }
-                          }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/startTime> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/startTime>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
                       {   { { SELECT  (?v AS ?t)
                               WHERE
@@ -394,17 +176,7 @@ WHERE
                                                         MINUS
                                                           { SELECT  ?v
                                                             WHERE
-                                                              { ?v  a  ?o
-                                                                { SELECT  (?v AS ?o)
-                                                                  WHERE
-                                                                    { SELECT  ?v
-                                                                      WHERE
-                                                                        { BIND(<http://schema.org/Place> AS ?v) }
-                                                                    }
-                                                                }
-                                                              }
-                                                            GROUP BY ?v
-                                                            HAVING ( COUNT(?o) >= 1 )
+                                                              { ?v  a  <http://schema.org/Place> }
                                                           }
                                                       }
                                                   }
@@ -449,17 +221,7 @@ WHERE
                                                         MINUS
                                                           { SELECT  ?v
                                                             WHERE
-                                                              { ?v  a  ?o
-                                                                { SELECT  (?v AS ?o)
-                                                                  WHERE
-                                                                    { SELECT  ?v
-                                                                      WHERE
-                                                                        { BIND(<http://schema.org/Place> AS ?v) }
-                                                                    }
-                                                                }
-                                                              }
-                                                            GROUP BY ?v
-                                                            HAVING ( COUNT(?o) >= 1 )
+                                                              { ?v  a  <http://schema.org/Place> }
                                                           }
                                                       }
                                                   }
@@ -478,17 +240,7 @@ WHERE
                                             WHERE
                                               { SELECT  ?v
                                                 WHERE
-                                                  { ?v  a  ?o
-                                                    { SELECT  (?v AS ?o)
-                                                      WHERE
-                                                        { SELECT  ?v
-                                                          WHERE
-                                                            { BIND(<http://schema.org/Place> AS ?v) }
-                                                        }
-                                                    }
-                                                  }
-                                                GROUP BY ?v
-                                                HAVING ( COUNT(?o) >= 1 )
+                                                  { ?v  a  <http://schema.org/Place> }
                                               }
                                           }
                                           { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
@@ -508,17 +260,7 @@ WHERE
                                             WHERE
                                               { SELECT  ?v
                                                 WHERE
-                                                  { ?v  a  ?o
-                                                    { SELECT  (?v AS ?o)
-                                                      WHERE
-                                                        { SELECT  ?v
-                                                          WHERE
-                                                            { BIND(<http://schema.org/Place> AS ?v) }
-                                                        }
-                                                    }
-                                                  }
-                                                GROUP BY ?v
-                                                HAVING ( COUNT(?o) >= 1 )
+                                                  { ?v  a  <http://schema.org/Place> }
                                               }
                                           }
                                           ?t  a  ?h
@@ -544,19 +286,158 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/distance> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/endTime> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/distance>  ?o }
+                            { ?s  <http://schema.org/endTime>  ?o }
                         }
                       }
                   }
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/endTime> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/description> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/endTime>  ?o }
+                            { ?s  <http://schema.org/description>  ?o }
                         }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      {   { { SELECT  (?v AS ?t)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { { SELECT  ?v
+                                        WHERE
+                                          {   { ?v  ?_a  ?_b }
+                                            UNION
+                                              { ?_c  ?_d  ?v }
+                                          }
+                                      }
+                                      MINUS
+                                        { SELECT  ?v
+                                          WHERE
+                                            { ?v  <http://schema.org/toLocation>  ?o
+                                              { SELECT  (?v AS ?o)
+                                                WHERE
+                                                  { SELECT  ?v
+                                                    WHERE
+                                                      { { SELECT  ?v
+                                                          WHERE
+                                                            {   { ?v  ?_a  ?_b }
+                                                              UNION
+                                                                { ?_c  ?_d  ?v }
+                                                            }
+                                                        }
+                                                        MINUS
+                                                          { SELECT  ?v
+                                                            WHERE
+                                                              { ?v  a  <http://schema.org/Place> }
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            { SELECT  (?s AS ?t) ?s (<http://schema.org/toLocation> AS ?p) ?o (?o AS ?h)
+                              WHERE
+                                { ?s  <http://schema.org/toLocation>  ?o }
+                            }
+                          }
+                        UNION
+                          { { SELECT  (?v AS ?t)
+                              WHERE
+                                { SELECT  ?v
+                                  WHERE
+                                    { { SELECT  ?v
+                                        WHERE
+                                          {   { ?v  ?_a  ?_b }
+                                            UNION
+                                              { ?_c  ?_d  ?v }
+                                          }
+                                      }
+                                      MINUS
+                                        { SELECT  ?v
+                                          WHERE
+                                            { ?v  <http://schema.org/toLocation>  ?o
+                                              { SELECT  (?v AS ?o)
+                                                WHERE
+                                                  { SELECT  ?v
+                                                    WHERE
+                                                      { { SELECT  ?v
+                                                          WHERE
+                                                            {   { ?v  ?_a  ?_b }
+                                                              UNION
+                                                                { ?_c  ?_d  ?v }
+                                                            }
+                                                        }
+                                                        MINUS
+                                                          { SELECT  ?v
+                                                            WHERE
+                                                              { ?v  a  <http://schema.org/Place> }
+                                                          }
+                                                      }
+                                                  }
+                                              }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ?t  <http://schema.org/toLocation>  ?h
+                            { SELECT  (?v AS ?h) ?s ?p ?o
+                              WHERE
+                                { SELECT  (?t AS ?v) ?s ?p ?o
+                                  WHERE
+                                    {   { { SELECT  (?v AS ?t)
+                                            WHERE
+                                              { SELECT  ?v
+                                                WHERE
+                                                  { ?v  a  <http://schema.org/Place> }
+                                              }
+                                          }
+                                          { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
+                                            WHERE
+                                              { ?s  a  ?o }
+                                          }
+                                          { SELECT  (?v AS ?h)
+                                            WHERE
+                                              { SELECT  ?v
+                                                WHERE
+                                                  { BIND(<http://schema.org/Place> AS ?v) }
+                                              }
+                                          }
+                                        }
+                                      UNION
+                                        { { SELECT  (?v AS ?t)
+                                            WHERE
+                                              { SELECT  ?v
+                                                WHERE
+                                                  { ?v  a  <http://schema.org/Place> }
+                                              }
+                                          }
+                                          ?t  a  ?h
+                                          { SELECT  (?v AS ?h) ?s ?p ?o
+                                            WHERE
+                                              { { SELECT  ?v ?s ?p ?o
+                                                  WHERE
+                                                    {  }
+                                                }
+                                                { SELECT  ?v
+                                                  WHERE
+                                                    { BIND(<http://schema.org/Place> AS ?v) }
+                                                }
+                                              }
+                                          }
+                                        }
+                                    }
+                                }
+                            }
+                          }
                       }
                   }
                 UNION
@@ -576,9 +457,18 @@ WHERE
                 UNION
                   { SELECT  (?t AS ?v) ?s ?p ?o
                     WHERE
-                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/description> AS ?p) ?o (?o AS ?h)
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/startTime> AS ?p) ?o (?o AS ?h)
                           WHERE
-                            { ?s  <http://schema.org/description>  ?o }
+                            { ?s  <http://schema.org/startTime>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?s AS ?t) ?s (<http://schema.org/distance> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/distance>  ?o }
                         }
                       }
                   }
@@ -594,17 +484,7 @@ WHERE
                               WHERE
                                 { SELECT  ?v
                                   WHERE
-                                    { ?v  a  ?o
-                                      { SELECT  (?v AS ?o)
-                                        WHERE
-                                          { SELECT  ?v
-                                            WHERE
-                                              { BIND(<http://schema.org/TravelAction> AS ?v) }
-                                          }
-                                      }
-                                    }
-                                  GROUP BY ?v
-                                  HAVING ( COUNT(?o) >= 1 )
+                                    { ?v  a  <http://schema.org/TravelAction> }
                                 }
                             }
                             { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
@@ -624,17 +504,7 @@ WHERE
                               WHERE
                                 { SELECT  ?v
                                   WHERE
-                                    { ?v  a  ?o
-                                      { SELECT  (?v AS ?o)
-                                        WHERE
-                                          { SELECT  ?v
-                                            WHERE
-                                              { BIND(<http://schema.org/TravelAction> AS ?v) }
-                                          }
-                                      }
-                                    }
-                                  GROUP BY ?v
-                                  HAVING ( COUNT(?o) >= 1 )
+                                    { ?v  a  <http://schema.org/TravelAction> }
                                 }
                             }
                             ?t  a  ?h
@@ -651,6 +521,60 @@ WHERE
                                 }
                             }
                           }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/fromLocation>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/fromLocation> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/fromLocation>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/endTime>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/endTime> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/endTime>  ?o }
+                        }
+                      }
+                  }
+                UNION
+                  { SELECT  (?t AS ?v) ?s ?p ?o
+                    WHERE
+                      { { SELECT  (?v AS ?t)
+                          WHERE
+                            { SELECT  ?v
+                              WHERE
+                                { ?v  <http://schema.org/description>  ?o }
+                              GROUP BY ?v
+                              HAVING ( COUNT(?o) = 1 )
+                            }
+                        }
+                        { SELECT  (?s AS ?t) ?s (<http://schema.org/description> AS ?p) ?o (?o AS ?h)
+                          WHERE
+                            { ?s  <http://schema.org/description>  ?o }
+                        }
                       }
                   }
                 UNION
@@ -696,42 +620,6 @@ WHERE
                           WHERE
                             { SELECT  ?v
                               WHERE
-                                { ?v  <http://schema.org/fromLocation>  ?o }
-                              GROUP BY ?v
-                              HAVING ( COUNT(?o) = 1 )
-                            }
-                        }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/fromLocation> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/fromLocation>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?v AS ?t)
-                          WHERE
-                            { SELECT  ?v
-                              WHERE
-                                { ?v  <http://schema.org/description>  ?o }
-                              GROUP BY ?v
-                              HAVING ( COUNT(?o) = 1 )
-                            }
-                        }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/description> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/description>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?v AS ?t)
-                          WHERE
-                            { SELECT  ?v
-                              WHERE
                                 { ?v  <http://schema.org/distance>  ?o }
                               GROUP BY ?v
                               HAVING ( COUNT(?o) = 1 )
@@ -740,24 +628,6 @@ WHERE
                         { SELECT  (?s AS ?t) ?s (<http://schema.org/distance> AS ?p) ?o (?o AS ?h)
                           WHERE
                             { ?s  <http://schema.org/distance>  ?o }
-                        }
-                      }
-                  }
-                UNION
-                  { SELECT  (?t AS ?v) ?s ?p ?o
-                    WHERE
-                      { { SELECT  (?v AS ?t)
-                          WHERE
-                            { SELECT  ?v
-                              WHERE
-                                { ?v  <http://schema.org/endTime>  ?o }
-                              GROUP BY ?v
-                              HAVING ( COUNT(?o) = 1 )
-                            }
-                        }
-                        { SELECT  (?s AS ?t) ?s (<http://schema.org/endTime> AS ?p) ?o (?o AS ?h)
-                          WHERE
-                            { ?s  <http://schema.org/endTime>  ?o }
                         }
                       }
                   }

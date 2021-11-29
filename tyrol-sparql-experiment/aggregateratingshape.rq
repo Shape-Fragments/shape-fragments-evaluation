@@ -1,4 +1,4 @@
-SELECT  ?v ?s ?p ?o
+CONSTRUCT { ?s ?p ?o }
 WHERE
   { { SELECT  ?v ?s ?p ?o
       WHERE
@@ -13,17 +13,7 @@ WHERE
                 }
                 { SELECT  ?v
                   WHERE
-                    { ?v  a  ?o
-                      { SELECT  (?v AS ?o)
-                        WHERE
-                          { SELECT  ?v
-                            WHERE
-                              { BIND(<http://schema.org/AggregateRating> AS ?v) }
-                          }
-                      }
-                    }
-                  GROUP BY ?v
-                  HAVING ( COUNT(?o) >= 1 )
+                    { ?v  a  <http://schema.org/AggregateRating> }
                 }
                 { SELECT  ?v
                   WHERE
@@ -85,17 +75,7 @@ WHERE
                               WHERE
                                 { SELECT  ?v
                                   WHERE
-                                    { ?v  a  ?o
-                                      { SELECT  (?v AS ?o)
-                                        WHERE
-                                          { SELECT  ?v
-                                            WHERE
-                                              { BIND(<http://schema.org/AggregateRating> AS ?v) }
-                                          }
-                                      }
-                                    }
-                                  GROUP BY ?v
-                                  HAVING ( COUNT(?o) >= 1 )
+                                    { ?v  a  <http://schema.org/AggregateRating> }
                                 }
                             }
                             { SELECT  (?s AS ?t) ?s (<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) ?o (?o AS ?h)
@@ -115,17 +95,7 @@ WHERE
                               WHERE
                                 { SELECT  ?v
                                   WHERE
-                                    { ?v  a  ?o
-                                      { SELECT  (?v AS ?o)
-                                        WHERE
-                                          { SELECT  ?v
-                                            WHERE
-                                              { BIND(<http://schema.org/AggregateRating> AS ?v) }
-                                          }
-                                      }
-                                    }
-                                  GROUP BY ?v
-                                  HAVING ( COUNT(?o) >= 1 )
+                                    { ?v  a  <http://schema.org/AggregateRating> }
                                 }
                             }
                             ?t  a  ?h
