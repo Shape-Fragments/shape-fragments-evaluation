@@ -5,19 +5,19 @@ cd $DIR
 source $DIR/pySHACL-fragments/.venv/bin/activate
 export PYTHONPATH=$DIR/pySHACL-fragments
 export PATH=$PATH:$DIR/apache-jena-4.2.0/bin
-for size in {1..5}
+for size in 1 1.5 2 2.5 3 3.5 4 4.5 5
 do
   echo "######### Size $size"
-  for shape in aggregateratingshape geoshapeshape imageobjectshape sportsactivityshape travelactionshape
+  for shape in aggregateratingshape offershape openinghoursspecificationshape postaladdressshape travelactionshape
   do
     echo "###### Shape $shape"
     echo "### SPARQL"
     # timing
-    sparql --time --data tyrol$size.nt --query $CURRENT_DIR/$shape.rq --repeat=2,5 
+    sparql --time --data tyrol$size.nt --query $CURRENT_DIR/$shape.rq --repeat=5 2>&1 1> /dev/null
 
     # getting fragment
-    sparql --data tyrol$size.nt --query $CURRENT_DIR/$shape.rq --results=nt > ${shape}sparqlfragment$size.nt
-    
+    sparql --data tyrol$size.nt --query $CURRENT_DIR/$shape.rq --results=nt 2> /dev/null > ${shape}sparqlfragment$size.nt
+
     echo "### pySHACL-fragments"
     totaltime="0.0"
     for run in {1..5}

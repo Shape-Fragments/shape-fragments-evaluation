@@ -14,7 +14,7 @@ cd ..
 
 for size in {1..5}
 do
-  wget curl -o tyrol.nt "https://cloud.ilabt.imec.be/index.php/s/2HiMDZMQAsAKNgc/download?path=/&files=tyrol$size.nt"
+  curl -o tyrol.nt "https://cloud.ilabt.imec.be/index.php/s/2HiMDZMQAsAKNgc/download?path=/&files=tyrol$size.nt"
 done
 
 wget https://dlcdn.apache.org/jena/binaries/apache-jena-4.2.0.tar.gz
