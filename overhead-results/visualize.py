@@ -59,24 +59,27 @@ for shape in benchmarks['1']['eval_average']:
     if benchmarks['4']['eval_average'][shape] / benchmarks['1']['eval_average'][shape] > 1.1:
         interesting_shapes.append(shape)
 
+paper_shapes = [  # 'aggregaterating',
+    'offer', 'openinghoursspecification', 'postaladdress']
+paper_shapes = [f'tyrol/{shape}shape.ttl' for shape in paper_shapes]
 # latex font
-font = FontProperties(fname='OldStandardTT-Regular.ttf')
+font = FontProperties(fname='../OldStandardTT-Regular.ttf')
 
-fig, axes = plt.subplots(7, 8, sharex=True, figsize=(30, 30))
-for i in range(54):
-    shape = sorted(benchmarks['1']['eval_average'])[i]
+fig, axes = plt.subplots(3, 1, sharex=True, figsize=(4, 4))
+for i, shape in enumerate(paper_shapes):
+    # shape = sorted(benchmarks['1']['eval_average'])[i]
     sizes = sorted([int(key) for key in benchmarks.keys()])
     eval_average = [benchmarks[str(size)]['eval_average'][shape] for size in sizes]
     extract_average = [benchmarks[str(size)]['extract_average'][shape] for size in sizes]
     print(eval_average)
     print(extract_average)
-    ax = axes[i // 8][i % 8]
+    ax = axes[i]
     ax.plot(sizes, eval_average, linewidth=0.75, color='black')
     ax.plot(sizes, extract_average, linewidth=0.75, color='black', linestyle='dashed')
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_visible(False)
-    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(True)
+    ax.spines['left'].set_visible(True)
     ymin, ymax = ax.get_ylim()
     ax.set_ylim((ymin / 1.618, ymax))
     ax.text(1, 0.2, shape[6:-9], ha='right', va='bottom', transform=ax.transAxes, fontproperties=font)
