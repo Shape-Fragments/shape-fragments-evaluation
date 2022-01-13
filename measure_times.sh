@@ -44,10 +44,10 @@ fi
     
       # prioritize pyshacl-fragments over any other pyshacl import (e.g. from pip)
       # expects pyshacl-fragments repository in sibling directory to this repository
-      export PYTHONPATH=../pyshacl-views
+      export PYTHONPATH=../pySHACL-fragments
 
       # expects pyshacl-fragments repository in sibling directory to this repository
-      extraction_time=$($python ../pyshacl-views/pyshacl/cli.py $directory/$benchmark.nt -o=$directory/$benchmark/${shape:6} -rs=True -s=$shape -df=nt -sf=turtle | head -n 1)
+      extraction_time=$($python ../pySHACL-fragments/pyshacl/cli.py $directory/$benchmark.nt -o=$directory/$benchmark/${shape:6} -rs=True -s=$shape -df=nt -sf=turtle | head -n 1)
 
       # sleep a bit to let the process close down completely
       sleep 10

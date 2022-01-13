@@ -23,6 +23,6 @@ for benchmark in "watdiv" "bsbm"; do
   docker kill $benchmark
   docker rm $benchmark
 
-  # start a docker container with a triplestore hosting the bsbm data:
+  # start a docker container with a triplestore hosting the benchmark data:
   docker run -p $port:$port --name $benchmark --mount type=bind,source=$directory/$benchmark.nt,target=/data/$benchmark.nt stain/jena-fuseki -- ./fuseki-server --port $port --file=/data/$benchmark.nt /sparql &
 done
