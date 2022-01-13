@@ -4,7 +4,7 @@
 
 - docker-compose
 - Java 11
-- graph-docker installed in directory `$DIR/graphdb-docker` (defautl for `$DIR` is `~`)
+- graphdb-docker installed in directory `$DIR/graphdb-docker` (default for `$DIR` is `~`): [Installation instructions](https://github.com/Ontotext-AD/graphdb-docker)
 
 ## Installation
 
